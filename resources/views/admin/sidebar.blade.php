@@ -41,13 +41,17 @@
                     </a>
                 </li>
 
-               
-                
                 <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('logout') }}" aria-expanded="false">
-                                <i class="mdi me-2 mdi-logout"></i><span class="hide-menu">Logout</span>
-                            </a>
-                        </li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
+                        @csrf
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link">
+                            <button type="submit" aria-expanded="false" style="background: none; border: none; padding: 0; color: inherit; cursor: pointer;">
+                                <i class="mdi me-2 mdi-logout"></i>
+                                <span class="hide-menu">Logout</span>
+                            </button>
+                        </a>
+                    </form>
+                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

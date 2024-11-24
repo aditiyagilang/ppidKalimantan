@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function showLoginForm()
     {
-        return view('auth.login'); // Ganti dengan path view login Anda
+        return view('admin.login'); // Ganti dengan path view login Anda
     }
 
     /**
@@ -34,7 +35,7 @@ class UserController extends Controller
         // Cek kredensial dan login
         if (Auth::attempt($credentials)) {
             // Jika login berhasil, redirect ke halaman dashboard atau halaman yang ditentukan
-            return redirect()->intended('dashboard'); // Ganti dengan route tujuan setelah login
+            return redirect()->intended('gallery'); // Ganti dengan route tujuan setelah login
         }
 
         // Jika login gagal
@@ -67,8 +68,8 @@ class UserController extends Controller
     /**
      * Middleware untuk memastikan pengguna terautentikasi.
      */
-    public function __construct()
-    {
-        $this->middleware('auth')->except(['showLoginForm', 'login']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth')->except(['showLoginForm', 'login']);
+    // }
 }
