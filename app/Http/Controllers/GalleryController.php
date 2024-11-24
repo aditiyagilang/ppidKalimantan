@@ -12,7 +12,11 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        //
+        // Mengambil data galeri dari database
+        $galleries = Gallery::all(); // Anda juga bisa gunakan pagination jika diperlukan
+
+        // Melempar data ke view
+        return view('admin.gallery', compact('galleries'));
     }
 
     /**
@@ -25,15 +29,19 @@ class GalleryController extends Controller
 
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
             'link' => 'required|url',
-            'title' => 'required',
-            'description' => 'required',
             'date' => 'required|date',
         ]);
 
+        // Simpan data galeri
         Gallery::create($request->all());
-        return redirect()->route('galleries.index');
+
+        // Redirect ke halaman galeri dengan pesan sukses
+        return redirect()->route('galleries.index')->with('success', 'Galeri berhasil ditambahkan.');
     }
 
     public function show(Gallery $gallery)
@@ -46,22 +54,36 @@ class GalleryController extends Controller
         return view('galleries.edit', compact('gallery'));
     }
 
-    public function update(Request $request, Gallery $gallery)
+    public function update(Request $request, $id)
     {
+        // Validasi input
         $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
             'link' => 'required|url',
-            'title' => 'required',
-            'description' => 'required',
             'date' => 'required|date',
         ]);
 
+        // Ambil galeri berdasarkan ID
+        $gallery = Gallery::findOrFail($id);
+
+        // Perbarui data galeri
         $gallery->update($request->all());
-        return redirect()->route('galleries.index');
+
+        // Redirect ke halaman galeri dengan pesan sukses
+        return redirect()->route('galleries.index')->with('success', 'Galeri berhasil diperbarui.');
     }
 
-    public function destroy(Gallery $gallery)
+    public function destroy($id)
     {
+        // Cari galeri berdasarkan ID
+        $gallery = Gallery::findOrFail($id);
+    
+        // Hapus galeri
         $gallery->delete();
-        return redirect()->route('galleries.index');
+    
+        // Redirect ke halaman galeri dengan pesan sukses
+        return redirect()->route('galleries.index')->with('success', 'Galeri berhasil dihapus.');
     }
+    
 }

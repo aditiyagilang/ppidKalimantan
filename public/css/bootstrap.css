@@ -1571,23 +1571,23 @@ pre code {
 .table-primary,
 .table-primary > th,
 .table-primary > td {
-  background-color: #b8daff;
+  background-color: #095824;
 }
 
 .table-primary th,
 .table-primary td,
 .table-primary thead th,
 .table-primary tbody + tbody {
-  border-color: #7abaff;
+  border-color: #095824;
 }
 
 .table-hover .table-primary:hover {
-  background-color: #9fcdff;
+  background-color: #095824;
 }
 
 .table-hover .table-primary:hover > td,
 .table-hover .table-primary:hover > th {
-  background-color: #9fcdff;
+  background-color: #095824;
 }
 
 .table-secondary,
@@ -5137,7 +5137,7 @@ a.badge-dark:focus, a.badge-dark.focus {
 }
 
 .alert-primary hr {
-  border-top-color: #9fcdff;
+  border-top-color: #095824;
 }
 
 .alert-primary .alert-link {
@@ -5516,7 +5516,7 @@ a.badge-dark:focus, a.badge-dark.focus {
 
 .list-group-item-primary.list-group-item-action:hover, .list-group-item-primary.list-group-item-action:focus {
   color: #004085;
-  background-color: #9fcdff;
+  background-color: #095824;
 }
 
 .list-group-item-primary.list-group-item-action.active {
