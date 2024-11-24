@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nik', 16);
             $table->string('full_name');
             $table->string('file')->nullable(); 
+            $table->string('ktp_url')->nullable(); 
             $table->text('address'); 
             $table->string('email')->unique();
             $table->string('phone_number', 15); 

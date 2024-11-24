@@ -12,8 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('public_information', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // Auto-increment primary key
+            $table->string('name_pd_okpd'); // Nama PD/OKPD
+            $table->string('document_name'); // Nama dokumen
+            $table->year('creation_year'); // Tahun pembuatan
+            $table->string('file_type'); // Tipe file
+            $table->integer('file_size'); // Ukuran file (dalam bytes)
+            $table->string('file'); // Path ke file
+            $table->timestamps(); // Created at dan updated at
         });
     }
 

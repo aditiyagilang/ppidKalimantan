@@ -18,6 +18,7 @@ class PublicInformationRequest extends Model
         'nik',
         'full_name',
         'file',
+        'ktp_url',
         'address',
         'email',
         'phone_number',
