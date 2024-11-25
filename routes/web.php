@@ -27,6 +27,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/gallery/{id}/edit', [GalleryController::class, 'edit'])->name('galleries.edit');
     Route::put('/admin/gallery/{id}', [GalleryController::class, 'update'])->name('galleries.update');
     Route::delete('/admin/gallery/{id}', [GalleryController::class, 'destroy'])->name('galleries.destroy');
+    
+    Route::get('request', [PublicInformationRequestController::class, 'index'])->name('request.index');
+    Route::get('request/data', [PublicInformationRequestController::class, 'show'])->name('request.data');
+    Route::post('request/update-status', [PublicInformationRequestController::class, 'updateStatus'])->name('request.updateStatus');
+    Route::delete('request/data/{id}', [PublicInformationRequestController::class, 'destroy'])->name('request.destroy');
+    
+    Route::get('objection', [ObjectionController::class, 'index'])->name('objection.index');
+    Route::get('objection/data', [ObjectionController::class, 'show'])->name('objection.data');
+    Route::post('objection/update-status', [ObjectionController::class, 'updateStatus'])->name('objection.updateStatus');
+    Route::delete('objection/data/{id}', [ObjectionController::class, 'destroy'])->name('objection.destroy');
 });
 
 

@@ -35,16 +35,16 @@
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center text-black {{ request()->routeIs('products*') ? 'active' : '' }}" href="">
-                            <img src="{{ asset('assets/product.svg') }}" alt="Products" style="width: 20px; height: 20px; margin-right: 5px;">
-                                Pengajuan Keberatan
+                            <a class="nav-link d-flex align-items-center text-black {{ request()->routeIs('request*') ? 'active' : '' }}" href="{{ route('request.index') }}">
+                                <img src="{{ asset('assets/user.svg') }}" alt="Users" style="width: 20px; height: 20px; margin-right: 5px;">
+                                Informasi
                             </a>
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center text-black {{ request()->routeIs('users*') ? 'active' : '' }}" href="">
-                            <img src="{{ asset('assets/user.svg') }}" alt="Users" style="width: 20px; height: 20px; margin-right: 5px;">
-                                Permohonan Informasi
+                            <a class="nav-link d-flex align-items-center text-black {{ request()->routeIs('objection*') ? 'active' : '' }}" href="{{ route('objection.index') }}">
+                            <img src="{{ asset('assets/product.svg') }}" alt="Objection" style="width: 20px; height: 20px; margin-right: 5px;">
+                                Keberatan
                             </a>
                         </li>
                         

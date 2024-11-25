@@ -15,15 +15,19 @@ class PublicInformationRequest extends Model
     // Kolom yang dapat diisi (mass assignable)
     protected $fillable = [
         'request_category',
+        'code',
         'nik',
         'full_name',
         'file',
         'ktp_url',
         'address',
+        'detail_information',
+        'reason',
         'email',
         'phone_number',
-        'occupation',
+        'job',
         'status',
+        'reject_reason',
     ];
 
     // Menentukan apakah kolom timestamps (created_at dan updated_at) digunakan
