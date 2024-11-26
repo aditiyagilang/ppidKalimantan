@@ -14,15 +14,16 @@ class Objection extends Model
 
     // Kolom yang dapat diisi (mass assignable)
     protected $fillable = [
-        'request_code',
+        'code',
         'nik',
-        'reason',
         'full_name',
         'address',
         'phone_number',
         'case_position',
+        'reason',
         'file',
         'status',
+        'reject_reason',
     ];
 
     // Menentukan kolom yang sebaiknya tidak bisa diubah langsung oleh pengguna
