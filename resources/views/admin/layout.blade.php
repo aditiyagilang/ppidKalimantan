@@ -49,7 +49,7 @@
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center text-black {{ request()->routeIs('admins*') ? 'active' : '' }}" href="">
+                            <a class="nav-link d-flex align-items-center text-black {{ request()->routeIs('reports*') ? 'active' : '' }}" href="{{ route('reports.index') }}">
                             <img src="{{ asset('assets/admin.svg') }}" alt="Admins" style="width: 19px; height: 19px; margin-right: 6px;">
                                 Laporan
                             </a>

@@ -19,7 +19,7 @@ Route::post('logout', [UserController::class, 'logout'])->name('logout');
 // Route::get('dashboard', [UserController::class, 'dashboard'])->middleware('auth');
 Route::resource('objections', ObjectionController::class);
 Route::resource('public_information_requests', PublicInformationRequestController::class);
-Route::resource('reports', ReportController::class);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/gallery', [GalleryController::class, 'index'])->name('galleries.index');
@@ -27,6 +27,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/gallery/{id}/edit', [GalleryController::class, 'edit'])->name('galleries.edit');
     Route::put('/admin/gallery/{id}', [GalleryController::class, 'update'])->name('galleries.update');
     Route::delete('/admin/gallery/{id}', [GalleryController::class, 'destroy'])->name('galleries.destroy');
+
+
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::post('/admin/reports', [ReportController::class, 'store'])->name('reports.store');
+    Route::put('/reports/{id}', [ReportController::class, 'update'])->name('reports.update');
+    Route::delete('/admin/reports/{id}', [ReportController::class, 'destroy'])->name('reports.destroy');
 });
 
 
