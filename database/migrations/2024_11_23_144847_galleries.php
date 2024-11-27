@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title'); // Judul galeri
             $table->text('description'); // Deskripsi galeri
             $table->date('date'); // Tanggal galeri
+            $table->enum('type', ['foto', 'video', 'comic', 'podcast'])->default('video');// Tanggal galeri
             $table->timestamps(); // Created at dan updated at
         });
     }

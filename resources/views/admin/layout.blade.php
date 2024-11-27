@@ -28,7 +28,7 @@
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center text-black {{ request()->routeIs('galleries*') ? 'active' : '' }}" href="{{ route('galleries.index') }}">
+                            <a class="nav-link d-flex align-items-center text-black {{ request()->routeIs('gallery*') ? 'active' : '' }}" href="{{ route('gallery.index') }}">
                                 <img src="{{ asset('assets/category.svg') }}" alt="Gallery" style="width: 20px; height: 20px; margin-right: 5px;">
                                 Galeri
                             </a>
@@ -49,9 +49,15 @@
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center text-black {{ request()->routeIs('reports*') ? 'active' : '' }}" href="{{ route('reports.index') }}">
+                            <a class="nav-link d-flex align-items-center text-black {{ request()->routeIs('reports*') ? 'active' : '' }}" href="{{ route('report.index') }}">
                             <img src="{{ asset('assets/admin.svg') }}" alt="Admins" style="width: 19px; height: 19px; margin-right: 6px;">
                                 Laporan
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center text-black {{ request()->routeIs('document*') ? 'active' : '' }}" href="{{ route('document.index') }}">
+                            <img src="{{ asset('assets/admin.svg') }}" alt="Admins" style="width: 19px; height: 19px; margin-right: 6px;">
+                                Dokumen Informasi
                             </a>
                         </li>
                         

@@ -2,88 +2,155 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Gallery;
+use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class GalleryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Tampilkan halaman utama galeri.
      */
     public function index()
     {
-        // Mengambil data galeri dari database
-        $galleries = Gallery::all(); // Anda juga bisa gunakan pagination jika diperlukan
-
-        // Melempar data ke view
-        return view('admin.gallery', compact('galleries'));
+        return view('admin.gallery.index');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Ambil data untuk DataTables.
      */
-    public function create()
+    public function show(Request $request)
     {
-        return view('galleries.create');
+        $query = Gallery::query();
+
+        return DataTables::of($query)
+            ->addColumn('type', function ($gallery) {
+                return ucfirst($gallery->type); 
+            })
+            ->addColumn('actions', function ($gallery) {
+                return '<button type="button" class="btn btn-info btn-sm detail-button" 
+                                data-id="' . $gallery->id . '" 
+                                data-type="' . $gallery->type . '" 
+                                data-title="' . $gallery->title . '" 
+                                data-description="' . $gallery->description . '" 
+                                data-link="' . $gallery->link . '" 
+                                data-date="' . $gallery->date . '">
+                                Detail
+                            </button>
+                            <button type="button" class="btn btn-warning btn-sm edit-button" 
+                                data-id="' . $gallery->id . '" 
+                                data-type="' . $gallery->type . '" 
+                                data-title="' . $gallery->title . '" 
+                                data-description="' . $gallery->description . '" 
+                                data-link="' . $gallery->link . '" 
+                                data-date="' . $gallery->date . '">
+                                Edit
+                            </button>
+                            <form action="' . route('gallery.destroy', $gallery->id) . '" method="POST" style="display:inline;" 
+                                onsubmit="return confirm(\'Apakah Anda yakin ingin menghapus galeri ini?\')">
+                                ' . csrf_field() . '
+                                ' . method_field('DELETE') . '
+                                <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                            </form>';
+            })
+            ->rawColumns(['type','actions'])
+            ->make(true);
     }
 
+    /**
+     * Tambahkan galeri baru.
+     */
     public function store(Request $request)
-    {
-        // Validasi input
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'link' => 'required|url',
-            'date' => 'required|date',
-        ]);
+{
+    $request->validate([
+        'type' => 'required|string',
+        'title' => 'required|string',
+        'description' => 'nullable|string',
+        'date' => 'nullable|date',
+        'link' => 'required', // Link is required for both foto and other types
+    ]);
 
-        // Simpan data galeri
-        Gallery::create($request->all());
+    // Buat laporan baru
+    $gallery = new Gallery(); // Menggunakan model Gallery sesuai dengan yang Anda buat
+    $gallery->type = $request->type;
+    $gallery->title = $request->title;
+    $gallery->description = $request->description;
+    $gallery->date = $request->date;
 
-        // Redirect ke halaman galeri dengan pesan sukses
-        return redirect()->route('galleries.index')->with('success', 'Galeri berhasil ditambahkan.');
+    // Periksa tipe dan atur input untuk link
+    if ($request->type === 'foto') {
+        // Proses gambar jika tipe foto
+        if ($request->hasFile('link')) {
+            $photo = $request->file('link');
+            $photoName = uniqid() . '_' . $photo->getClientOriginalName();
+            $photo->move(public_path('assets/foto'), $photoName);
+            $gallery->link = $photoName; // Menyimpan nama gambar
+        }
+    } else {
+        // Jika tipe selain foto, simpan link URL
+        $gallery->link = $request->link;
     }
 
-    public function show(Gallery $gallery)
-    {
-        return view('galleries.show', compact('gallery'));
+    // Simpan data galeri
+    $gallery->save();
+
+    return response()->json(['message' => 'Data berhasil disimpan!']);
+}
+
+public function update(Request $request)
+{
+    $request->validate([
+        'id' => 'required|exists:galleries,id',
+        'type' => 'required|string',
+        'title' => 'required|string',
+        'description' => 'nullable|string',
+        'date' => 'nullable|date',
+        'link' => 'required', // Link is required for both foto and other types
+    ]);
+
+    // Ambil data galeri yang akan diperbarui
+    $gallery = Gallery::findOrFail($request->id);
+    $gallery->type = $request->type;
+    $gallery->title = $request->title;
+    $gallery->description = $request->description;
+    $gallery->date = $request->date;
+
+    // Periksa tipe dan atur input untuk link
+    if ($request->type === 'foto') {
+        // Proses gambar jika tipe foto
+        if ($request->hasFile('link')) {
+            // Hapus file lama jika ada
+            if ($gallery->link && file_exists(public_path('assets/foto/' . $gallery->link))) {
+                unlink(public_path('assets/foto/' . $gallery->link));
+            }
+
+            // Simpan file foto baru
+            $photo = $request->file('link');
+            $photoName = uniqid() . '_' . $photo->getClientOriginalName();
+            $photo->move(public_path('assets/foto'), $photoName);
+            $gallery->link = $photoName; // Menyimpan nama gambar
+        }
+    } else {
+        // Jika tipe selain foto, simpan link URL
+        $gallery->link = $request->link;
     }
 
-    public function edit(Gallery $gallery)
-    {
-        return view('galleries.edit', compact('gallery'));
-    }
+    // Simpan perubahan
+    $gallery->save();
 
-    public function update(Request $request, $id)
-    {
-        // Validasi input
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'link' => 'required|url',
-            'date' => 'required|date',
-        ]);
+    return response()->json(['message' => 'Data berhasil diperbarui!']);
+}
 
-        // Ambil galeri berdasarkan ID
-        $gallery = Gallery::findOrFail($id);
 
-        // Perbarui data galeri
-        $gallery->update($request->all());
-
-        // Redirect ke halaman galeri dengan pesan sukses
-        return redirect()->route('galleries.index')->with('success', 'Galeri berhasil diperbarui.');
-    }
-
+    /**
+     * Hapus galeri.
+     */
     public function destroy($id)
     {
-        // Cari galeri berdasarkan ID
         $gallery = Gallery::findOrFail($id);
-    
-        // Hapus galeri
         $gallery->delete();
-    
-        // Redirect ke halaman galeri dengan pesan sukses
-        return redirect()->route('galleries.index')->with('success', 'Galeri berhasil dihapus.');
+
+        return redirect()->back()->with('success', 'Galeri berhasil dihapus.');
     }
-    
 }

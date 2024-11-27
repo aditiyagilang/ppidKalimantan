@@ -16,12 +16,22 @@ class Gallery extends Model
     protected $fillable = [
         'link',
         'title',
+        'type',
         'description',
         'date',
     ];
 
     // Menentukan apakah kolom timestamps (created_at dan updated_at) digunakan
     public $timestamps = true;
+
+    const TYPE_FOTO = 'foto';
+    const TYPE_VIDEO = 'video';
+    const TYPE_COMIC = 'comic';
+    const TYPE_PODCAST = 'podcast';
+
+    protected $casts = [
+        'type' => 'string', // Pastikan type disimpan sebagai string
+    ];
 
     /**
      * Menampilkan tanggal dalam format yang lebih mudah dibaca.

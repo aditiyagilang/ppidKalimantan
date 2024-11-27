@@ -6,6 +6,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ObjectionController;
 use App\Http\Controllers\PublicInformationRequestController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\PublicInformationController;
 
 Route::get('/', function () {
     return view('public.index');
@@ -28,10 +29,30 @@ Route::middleware('auth')->group(function () {
     Route::put('/admin/gallery/{id}', [GalleryController::class, 'update'])->name('galleries.update');
     Route::delete('/admin/gallery/{id}', [GalleryController::class, 'destroy'])->name('galleries.destroy');
 
-    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
-    Route::post('/admin/reports', [ReportController::class, 'store'])->name('reports.store');
-    Route::put('/reports/{id}', [ReportController::class, 'update'])->name('reports.update');
-    Route::delete('/admin/reports/{id}', [ReportController::class, 'destroy'])->name('reports.destroy');
+
+    Route::get('report', [ReportController::class, 'index'])->name('report.index');
+    Route::get('report/data', [ReportController::class, 'show'])->name('report.show');
+    Route::post('report/update-status', [ReportController::class, 'updateStatus'])->name('report.updateStatus');
+    Route::delete('report/data/{id}', [ReportController::class, 'destroy'])->name('report.destroy');
+    Route::post('report/update', [ReportController::class, 'update'])->name('report.update');
+    Route::post('report/store', [ReportController::class, 'store'])->name('report.store');
+
+
+    Route::get('document', [PublicInformationController::class, 'index'])->name('document.index');
+    Route::get('document/data', [PublicInformationController::class, 'show'])->name('document.show');
+    Route::post('document/update-status', [PublicInformationController::class, 'updateStatus'])->name('document.updateStatus');
+    Route::delete('document/data/{id}', [PublicInformationController::class, 'destroy'])->name('document.destroy');
+    Route::post('document/update', [PublicInformationController::class, 'update'])->name('document.update');
+    Route::post('document/store', [PublicInformationController::class, 'store'])->name('document.store');
+
+
+
+    Route::get('gallery', [GalleryController::class, 'index'])->name('gallery.index');
+    Route::get('gallery/data', [GalleryController::class, 'show'])->name('gallery.show');
+    Route::delete('gallery/data/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
+    Route::post('gallery/update', [GalleryController::class, 'update'])->name('gallery.update');
+    Route::post('gallery/store', [GalleryController::class, 'store'])->name('gallery.store');
+
 
     
     Route::get('request', [PublicInformationRequestController::class, 'index'])->name('request.index');

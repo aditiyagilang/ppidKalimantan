@@ -2,135 +2,202 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\PublicInformation;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class PublicInformationController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Tampilkan halaman utama laporan.
      */
     public function index()
     {
-        //
+        return view('admin.document.index');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Ambil data untuk DataTables.
      */
-    public function create()
+    public function show(Request $request)
     {
-        return view('public_information.create');
+        $query = PublicInformation::query();
+
+        return DataTables::of($query)
+          
+        ->addColumn('actions', function ($document) {
+            return '<button type="button" class="btn btn-info btn-sm detail-button" 
+                            data-id="' . $document->id . '" 
+                            data-name_pd_okpd="' . $document->name_pd_okpd . '"
+                            data-document_name="' . $document->document_name . '" 
+                            data-creation_year="' . $document->creation_year . '" 
+                         
+                            data-file_type="' . $document->file_type . '" 
+                            data-file_size="' . $document->file_size . '" 
+                            data-file="' . $document->file . '" 
+                          >
+                            Detail
+                        </button>
+                        <button type="button" class="btn btn-warning btn-sm edit-button" 
+                             data-id="' . $document->id . '" 
+                            data-name_pd_okpd="' . $document->name_pd_okpd . '"
+                            data-document_name="' . $document->document_name . '" 
+                            data-creation_year="' . $document->creation_year . '" 
+                         
+                            data-file_type="' . $document->file_type . '" 
+                            data-file_size="' . $document->file_size . '" 
+                            data-file="' . $document->file . '" 
+                           >
+                            Edit
+                        </button>
+                        <form action="' . route('document.destroy', $document->id) . '" method="POST" style="display:inline;" 
+                            onsubmit="return confirm(\'Apakah Anda yakin ingin menghapus laporan ini?\')">
+                            ' . csrf_field() . '
+                            ' . method_field('DELETE') . '
+                            <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                        </form>';
+        })
+            
+            ->rawColumns(['actions'])
+            ->make(true);
     }
 
     /**
-     * Menyimpan informasi publik yang baru dibuat.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * Perbarui status laporan.
      */
-    public function store(Request $request)
+    public function updateStatus(Request $request)
     {
-        // Validasi input
         $request->validate([
-            'name_pd_okpd' => 'required|string|max:255',
-            'document_name' => 'required|string|max:255',
-            'creation_year' => 'required|integer|digits:4',
-            'file' => 'required|file|mimes:pdf,docx,xlsx,jpg,png|max:10240', // Max 10MB
+            'id' => 'required|exists:reports,id',
+            'status' => 'required|in:private,public',
         ]);
 
-        // Mengupload file
-        $filePath = $request->file('file')->store('public/information_files');
+        $report = Report::findOrFail($request->id);
+        $report->update(['status' => $request->status]);
 
-        // Menyimpan data ke dalam database
-        PublicInformation::create([
-            'name_pd_okpd' => $request->name_pd_okpd,
-            'document_name' => $request->document_name,
-            'creation_year' => $request->creation_year,
-            'file_type' => $request->file('file')->getClientOriginalExtension(),
-            'file_size' => $request->file('file')->getSize(),
-            'file' => $filePath,
+        return response()->json([
+            'message' => 'Status laporan berhasil diperbarui.',
         ]);
-
-        return redirect()->route('public_information.index')->with('success', 'Informasi publik berhasil dibuat!');
     }
 
-    /**
-     * Menampilkan detail informasi publik.
-     *
-     * @param  \App\Models\PublicInformation  $publicInformation
-     * @return \Illuminate\View\View
-     */
-    public function show(PublicInformation $publicInformation)
-    {
-        return view('public_information.show', compact('publicInformation'));
-    }
+    public function update(Request $request)
+{
 
-    /**
-     * Menampilkan form untuk mengedit informasi publik.
-     *
-     * @param  \App\Models\PublicInformation  $publicInformation
-     * @return \Illuminate\View\View
-     */
-    public function edit(PublicInformation $publicInformation)
-    {
-        return view('public_information.edit', compact('publicInformation'));
-    }
+    // dd($request->all());
+    $request->validate([
+        'id' => 'required',
+        'name_pd_okpd' => 'required|string',
+        'document_name' => 'required|string',
+        'creation_year' => 'required',
+   
+       
+        'file_type' => 'required',
+        'file_size' => 'required',
+        'file' => 'nullable',
+    ]);
+    // dd($request->all());
 
-    /**
-     * Memperbarui informasi publik.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PublicInformation  $publicInformation
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(Request $request, PublicInformation $publicInformation)
-    {
-        // Validasi input
-        $request->validate([
-            'name_pd_okpd' => 'required|string|max:255',
-            'document_name' => 'required|string|max:255',
-            'creation_year' => 'required|integer|digits:4',
-            'file' => 'nullable|file|mimes:pdf,docx,xlsx,jpg,png|max:10240', // Max 10MB
-        ]);
+    // Ambil laporan berdasarkan ID
+    $document = PublicInformation::findOrFail($request->id);
+    $document->name_pd_okpd = $request->name_pd_okpd;
+    $document->document_name = $request->document_name;
+    $document->creation_year = $request->creation_year;
+    $document->file_type = $request->file_type;
+    $document->file_size = $request->file_size;
+   
 
-        // Jika file baru diupload
-        if ($request->hasFile('file')) {
-            // Hapus file lama dari storage
-            Storage::delete($publicInformation->file);
-
-            // Upload file baru
-            $filePath = $request->file('file')->store('public/information_files');
-
-            // Perbarui data file
-            $publicInformation->file = $filePath;
-            $publicInformation->file_type = $request->file('file')->getClientOriginalExtension();
-            $publicInformation->file_size = $request->file('file')->getSize();
+    // Proses file lainnya jika ada
+    if ($request->hasFile('file')) {
+        // Hapus file lama jika ada
+        if ($document->file && file_exists(public_path('assets/file/' . $document->file))) {
+            unlink(public_path('assets/file/' . $document->file));
         }
 
-        // Memperbarui informasi publik
-        $publicInformation->update([
-            'name_pd_okpd' => $request->name_pd_okpd,
-            'document_name' => $request->document_name,
-            'creation_year' => $request->creation_year,
-        ]);
+        // Simpan file baru
+        $file = $request->file('file');
+        $fileName = uniqid() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('assets/file'), $fileName);
+        $document->file = $fileName;
+    }
 
-        return redirect()->route('public_information.index')->with('success', 'Informasi publik berhasil diperbarui!');
+    // Simpan perubahan
+    $document->save();
+
+    return response()->json(['message' => 'Laporan berhasil diperbarui!']);
+}
+
+
+public function store(Request $request)
+{
+
+    
+    $request->validate([
+        'name_pd_okpd' => 'required|string',
+        'document_name' => 'required|string',
+        'creation_year' => 'required',
+        'file_type' => 'required',
+        'file_size' => 'required',
+        'file' => 'nullable', // Validasi file
+    ]);
+    // dd($request->all());
+
+    // Buat instance baru PublicInformation
+    $document = new PublicInformation();
+    $document->name_pd_okpd = $request->name_pd_okpd;
+    $document->document_name = $request->document_name;
+    $document->creation_year = $request->creation_year;
+    $document->file_type = $request->file_type;
+    $document->file_size = $request->file_size;
+
+    // Proses file
+    if ($request->hasFile('file')) {
+        $file = $request->file('file');
+        $fileName = uniqid() . '_' . $file->getClientOriginalName();
+        
+        // Buat folder jika belum ada
+        if (!file_exists(public_path('assets/file'))) {
+            mkdir(public_path('assets/file'), 0777, true);
+        }
+
+        // Pindahkan file ke folder
+        $file->move(public_path('assets/file'), $fileName);
+        $document->file = $fileName;
+    }
+
+    // Simpan ke database
+    $document->save();
+
+    return response()->json([
+        'message' => 'Laporan berhasil ditambahkan!',
+        'data' => $document,
+    ], 201);
+}
+
+
+
+
+
+    /**
+     * Hapus laporan.
+     */
+    public function destroy($id)
+    {
+        $report = PublicInformation::findOrFail($id);
+        $report->delete();
+
+        return redirect()->back()->with('success', 'Laporan berhasil dihapus.');
     }
 
     /**
-     * Menghapus informasi publik.
-     *
-     * @param  \App\Models\PublicInformation  $publicInformation
-     * @return \Illuminate\Http\RedirectResponse
+     * Mendapatkan warna status untuk dropdown.
      */
-    public function destroy(PublicInformation $publicInformation)
+    private function getStatusColor($status)
     {
-        // Hapus file dari storage
-        Storage::delete($publicInformation->file);
-
-        // Hapus data dari database
-        $publicInformation->delete();
-
-        return redirect()->route('public_information.index')->with('success', 'Informasi publik berhasil dihapus!');
+        return match ($status) {
+            'private' => '#d9534f', // Merah
+            'public' => '#5cb85c',  // Hijau
+            default => '#ddd',     // Abu-abu
+        };
     }
 }

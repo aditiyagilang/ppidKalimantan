@@ -2,139 +2,211 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Report;
+use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ReportController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Tampilkan halaman utama laporan.
      */
     public function index()
     {
-        $reports = Report::all(); // Anda juga bisa gunakan pagination jika diperlukan
-
-        // Melempar data ke view
-        return view('admin.report', compact('reports'));
-        //
+        return view('admin.report.index');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Ambil data untuk DataTables.
      */
-    public function create()
+    public function show(Request $request)
     {
+        $query = Report::query();
 
-    
-       
+        return DataTables::of($query)
+            ->addColumn('type', function ($report) {
+                return ucfirst($report->type); // Menampilkan tipe dengan huruf pertama kapital
+            })
+            ->addColumn('status', function ($report) {
+                $statusDropdown = '<select class="form-select form-select-sm status-dropdown rounded-pill" 
+                                            style="background-color: ' . $this->getStatusColor($report->status) . '; color: #000; font-size: 12px;"
+                                            data-id="' . $report->id . '" 
+                                            name="status">';
+
+                foreach (['private', 'public'] as $status) {
+                    $selected = $report->status === $status ? 'selected' : '';
+                    $statusDropdown .= '<option value="' . $status . '" ' . $selected . '>' . ucfirst($status) . '</option>';
+                }
+
+                $statusDropdown .= '</select>';
+                return $statusDropdown;
+            })
+            ->addColumn('actions', function ($report) {
+                return '<button type="button" class="btn btn-info btn-sm detail-button" 
+                                data-id="' . $report->id . '" 
+                                data-type="' . $report->type . '" 
+                                data-year="' . $report->year . '" 
+                                data-status="' . $report->status . '" 
+                                data-file="' . $report->file . '" 
+                                data-photo="' . $report->photo . '">
+                                Detail
+                            </button>
+                            <button type="button" class="btn btn-warning btn-sm edit-button" 
+                                data-id="' . $report->id . '" 
+                                data-type="' . $report->type . '" 
+                                data-year="' . $report->year . '" 
+                                data-status="' . $report->status . '" 
+                                data-file="' . $report->file . '" 
+                                data-photo="' . $report->photo . '"
+                              >
+                                Edit
+                            </button>
+                            <form action="' . route('report.destroy', $report->id) . '" method="POST" style="display:inline;" 
+                                onsubmit="return confirm(\'Apakah Anda yakin ingin menghapus laporan ini?\')">
+                                ' . csrf_field() . '
+                                ' . method_field('DELETE') . '
+                                <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                            </form>';
+            })
+            
+            ->rawColumns(['status', 'actions'])
+            ->make(true);
     }
 
+    /**
+     * Perbarui status laporan.
+     */
+    public function updateStatus(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:reports,id',
+            'status' => 'required|in:private,public',
+        ]);
 
+        $report = Report::findOrFail($request->id);
+        $report->update(['status' => $request->status]);
 
-    public function store(Request $request)
+        return response()->json([
+            'message' => 'Status laporan berhasil diperbarui.',
+        ]);
+    }
+
+    public function update(Request $request)
 {
-    // Validasi input
-    $request->validate([
-        'file' => 'required|file', // Pastikan input file ada
-        'photo' => 'required|file', // Pastikan input foto ada
-        'type' => 'required|in:ppid,finance,performance,administration', // Validasi tipe
-        'year' => 'required|integer', // Pastikan year adalah angka
-        'status' => 'required|in:private,public', // Validasi status
-    ]);
 
+
+    $request->validate([
+        'id' => 'required',
+        'type' => 'required|string',
+        'year' => 'required',
+        'status' => 'required|string',
+        'photo' => 'required',
+        'file' => 'required', 
+    ]);
     // dd($request->all());
 
-    // Ambil file dan foto dari request
-    $file = $request->file('file');
-    $photo = $request->file('photo');
 
-    // Tentukan path penyimpanan
-    $filePath = 'assets/file/';
-    $photoPath = 'assets/foto/';
 
-    // Pindahkan file ke direktori public/assets/file
-    $fileName = time() . '_' . $file->getClientOriginalName();
-    $file->move(public_path($filePath), $fileName);
+    // Ambil laporan berdasarkan ID
+    $report = Report::findOrFail($request->id);
+    $report->type = $request->type;
+    $report->year = $request->year;
+    $report->status = $request->status;
 
-    // Pindahkan foto ke direktori public/assets/foto
-    $photoName = time() . '_' . $photo->getClientOriginalName();
-    $photo->move(public_path($photoPath), $photoName);
+    // Proses foto jika ada
+    if ($request->hasFile('photo')) {
+        // Hapus file lama jika ada
+        if ($report->photo && file_exists(public_path('assets/foto/' . $report->photo))) {
+            unlink(public_path('assets/foto/' . $report->photo));
+        }
 
-    // Simpan data ke database
-    Report::create([
-        'file' => $filePath . $fileName, // Simpan path relatif
-        'photo' => $photoPath . $photoName, // Simpan path relatif
-        'type' => $request->type,
-        'year' => $request->year,
-        'status' => $request->status,
+        // Simpan file foto baru
+        $photo = $request->file('photo');
+        $photoName = uniqid() . '_' . $photo->getClientOriginalName();
+        $photo->move(public_path('assets/foto'), $photoName);
+        $report->photo = $photoName;
+    }
+
+    // Proses file lainnya jika ada
+    if ($request->hasFile('file')) {
+        // Hapus file lama jika ada
+        if ($report->file && file_exists(public_path('assets/file/' . $report->file))) {
+            unlink(public_path('assets/file/' . $report->file));
+        }
+
+        // Simpan file baru
+        $file = $request->file('file');
+        $fileName = uniqid() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('assets/file'), $fileName);
+        $report->file = $fileName;
+    }
+
+    // Simpan perubahan
+    $report->save();
+
+    return response()->json(['message' => 'Laporan berhasil diperbarui!']);
+}
+
+public function store(Request $request)
+{
+    $request->validate([
+        'type' => 'required|string',
+        'year' => 'required|integer',
+        'status' => 'required|string',
+        'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        'file' => 'nullable|file|mimes:pdf,doc,docx,xlsx,xls|max:2048',
     ]);
 
-    // Redirect dengan notifikasi sukses
-    return redirect()->route('reports.index')->with('success', 'Laporan berhasil ditambahkan.');
+    // Buat laporan baru
+    $report = new Report();
+    $report->type = $request->type;
+    $report->year = $request->year;
+    $report->status = $request->status;
+
+    // Proses foto jika ada
+    if ($request->hasFile('photo')) {
+        $photo = $request->file('photo');
+        $photoName = uniqid() . '_' . $photo->getClientOriginalName();
+        $photo->move(public_path('assets/foto'), $photoName);
+        $report->photo = $photoName;
+    }
+
+    // Proses file jika ada
+    if ($request->hasFile('file')) {
+        $file = $request->file('file');
+        $fileName = uniqid() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('assets/file'), $fileName);
+        $report->file = $fileName;
+    }
+
+    // Simpan laporan baru
+    $report->save();
+
+    return response()->json(['message' => 'Laporan berhasil disimpan!']);
 }
 
 
-
-    public function show(Report $report)
+    /**
+     * Hapus laporan.
+     */
+    public function destroy($id)
     {
-        return view('reports.show', compact('report'));
-    }
-
-    public function edit(Report $report)
-    {
-        return view('reports.edit', compact('report'));
-    }
-
-    public function update(Request $request, Report $report)
-    {
-        $request->validate([
-            'file' => 'nullable|file|mimes:pdf,docx|max:2048', // Opsional saat diperbarui
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Opsional saat diperbarui
-            'type' => 'required|in:ppid,finance,performance,administration',
-            'year' => 'required|integer|min:1900|max:' . date('Y'),
-            'status' => 'required|in:private,public',
-        ]);
-    
-        // Update file laporan jika ada file baru
-        if ($request->hasFile('file')) {
-            // Hapus file lama jika ada
-            if ($report->file && file_exists(public_path('assets/file/' . basename($report->file)))) {
-                unlink(public_path('assets/file/' . basename($report->file)));
-            }
-    
-            // Simpan file baru
-            $fileName = time() . '_' . $request->file('file')->getClientOriginalName();
-            $request->file('file')->move(public_path('assets/file'), $fileName);
-            $report->file = 'assets/file/' . $fileName;
-        }
-    
-        // Update foto jika ada file baru
-        if ($request->hasFile('photo')) {
-            // Hapus foto lama jika ada
-            if ($report->photo && file_exists(public_path('assets/foto/' . basename($report->photo)))) {
-                unlink(public_path('assets/foto/' . basename($report->photo)));
-            }
-    
-            // Simpan foto baru
-            $photoName = time() . '_' . $request->file('photo')->getClientOriginalName();
-            $request->file('photo')->move(public_path('assets/foto'), $photoName);
-            $report->photo = 'assets/foto/' . $photoName;
-        }
-    
-        // Update field lainnya
-        $report->type = $request->type;
-        $report->year = $request->year;
-        $report->status = $request->status;
-    
-        $report->save();
-    
-        return redirect()->route('reports.index')->with('success', 'Laporan berhasil diperbarui.');
-    }
-    
-
-    public function destroy(Report $report)
-    {
+        $report = Report::findOrFail($id);
         $report->delete();
-        return redirect()->route('reports.index');
+
+        return redirect()->back()->with('success', 'Laporan berhasil dihapus.');
+    }
+
+    /**
+     * Mendapatkan warna status untuk dropdown.
+     */
+    private function getStatusColor($status)
+    {
+        return match ($status) {
+            'private' => '#d9534f', // Merah
+            'public' => '#5cb85c',  // Hijau
+            default => '#ddd',     // Abu-abu
+        };
     }
 }
