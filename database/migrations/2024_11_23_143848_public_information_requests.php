@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('address'); 
             $table->text('detail_information'); 
             $table->text('reason'); 
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('phone_number', 15); 
             $table->string('job'); 
             $table->enum('status', ['Approved', 'Checking', 'Rejected'])->default('checking'); 

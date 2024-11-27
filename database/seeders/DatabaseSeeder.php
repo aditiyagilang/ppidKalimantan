@@ -64,6 +64,7 @@ class DatabaseSeeder extends Seeder
                 'nik' => $faker->numerify('##############'),
                 'full_name' => $faker->name,
                 'address' => $faker->address,
+                'email' => $faker->unique()->safeEmail,
                 'phone_number' => $faker->numerify('08###########'),
                 'case_position' => $faker->sentence(15),
                 'reason' => $faker->sentence(10),

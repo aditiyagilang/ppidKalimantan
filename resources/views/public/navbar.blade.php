@@ -95,7 +95,7 @@
     </div>
   </footer>
   <!-- footer section -->
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
   <script src="{{ asset('js/bootstrap.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
@@ -105,6 +105,17 @@
   <!-- Google Map -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
   <!-- End Google Map -->
+
+  @if (session('success'))
+      <script>
+          Swal.fire({
+              title: 'Berhasil!',
+              text: "{{ session('success') }}",
+              icon: 'success',
+              confirmButtonText: 'OK'
+          });
+      </script>
+  @endif
 
   @stack('scripts')
 </body>

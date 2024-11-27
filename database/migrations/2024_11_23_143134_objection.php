@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nik', 16);
             $table->string('full_name');
             $table->text('address'); 
+            $table->string('email');
             $table->string('phone_number', 15); 
             $table->text('case_position'); 
             $table->text('reason'); 

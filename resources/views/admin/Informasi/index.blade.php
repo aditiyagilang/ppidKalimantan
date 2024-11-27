@@ -20,8 +20,6 @@
                 </div>
             </div>
             
-            <!-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addGalleryModal">Tambah</button> -->
-            
             <div class="table-responsive-sm mt-3">
                 <table id="requestTable" class="table table-striped table-xm" style="width:100%">
                     <thead>
@@ -88,7 +86,13 @@
                     </div>
                 </div>
             </div>
-            
+        </div>
+    </div>
+
+    <div id="loadingOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 9998;"></div>
+    <div id="loadingSpinner" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
         </div>
     </div>
 @endsection
@@ -129,6 +133,9 @@
         });
 
         function updateStatus(requestId, status, rejectReason) {
+            $('#loadingOverlay').show();
+            $('#loadingSpinner').show();
+
             $.ajax({
                 url: '{{ route('request.updateStatus') }}',
                 type: 'POST',
@@ -139,6 +146,9 @@
                     reject_reason: rejectReason
                 },
                 success: function(response) {
+                    $('#loadingOverlay').hide();
+                    $('#loadingSpinner').hide();
+
                     if (response.success) {
                         requestTable.ajax.reload(null, false);
                         alert('Status berhasil diperbarui');
@@ -187,8 +197,8 @@
         $('#detailReason').text(reason);
         $('#detailDetail').text(detail);
         $('#detailCategory').text(category);
-        $('#detailKTP').attr('src', ktpUrl ? ktpUrl : "{{asset('assets/ktp.png')}}");
-        $('#detailFile').attr('href', fileUrl);
+        $('#detailKTP').attr('src', ktpUrl ? `storage/${ktpUrl}` : "{{ asset('assets/ktp.png') }}");
+        $('#detailFile').attr('href', `storage/${fileUrl}`);
 
         $('#detailModal').modal('show');
     });

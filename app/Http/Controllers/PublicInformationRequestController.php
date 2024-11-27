@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PublicInformationRequest;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Str;
+use App\Mail\CodeNotification;
+use App\Mail\StatusUpdateNotification;
+use Illuminate\Support\Facades\Mail;
 
 class PublicInformationRequestController extends Controller
 {
@@ -13,9 +17,12 @@ class PublicInformationRequestController extends Controller
      */
     public function index()
     {
-        // $products = PublicInformationRequest::get();
-        // return dd($products);
         return view('admin.informasi.index');
+    }
+
+    public function publicForm()
+    {
+        return view('public.informationForm');
     }
 
     private function getStatusColor($status)
@@ -79,20 +86,46 @@ class PublicInformationRequestController extends Controller
 
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
-            'request_category' => 'required',
+            'type' => 'required',
             'nik' => 'required',
-            'full_name' => 'required',
-            'file' => 'nullable|file',
+            'name' => 'required',
+            'ktp' => 'required|file|mimes:jpg,png,pdf|max:5000',
+            'detail' => 'required',
+            'reason' => 'required',
+            'job' => 'required',
+            'file' => 'nullable|file|mimes:jpg,png,pdf|max:5000',
             'address' => 'required',
-            'email' => 'required|email|unique:public_information_requests',
-            'phone_number' => 'required',
-            'occupation' => 'required',
-            'status' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
         ]);
 
-        PublicInformationRequest::create($request->all());
-        return redirect()->route('public_information_requests.index');
+        $ktpPath = $request->file('ktp')->store('uploads/ktp', 'public');
+        $filePath = $request->hasFile('file') 
+            ? $request->file('file')->store('uploads/files', 'public') 
+            : null;
+            
+        $randomCode = 'PIP' . Str::random(7);
+
+        PublicInformationRequest::create([
+            'request_category' => $request->type,
+            'code' => $randomCode,
+            'nik' => $request->nik,
+            'full_name' => $request->name,
+            'ktp_url' => $ktpPath,
+            'detail_information' => $request->detail,
+            'reason' => $request->reason,
+            'job' => $request->job,
+            'file' => $filePath,
+            'address' => $request->address,
+            'email' => $request->email,
+            'phone_number' => $request->phone,
+        ]);
+
+        Mail::to($request->email)->send(new CodeNotification($randomCode));
+
+        return redirect()->route('public.index')->with('success', 'Permohonan berhasil diajukan. Silahkan cek email anda untuk informasi lebih lanjut');
     }
 
     public function edit(PublicInformationRequest $request)
@@ -130,6 +163,8 @@ class PublicInformationRequestController extends Controller
         $record->status = $validated['status'];
         $record->reject_reason = $validated['reject_reason'] ?? null;
         $record->save();
+
+        Mail::to($record->email)->send(new StatusUpdateNotification($record->status, $record->reject_reason));
 
         return response()->json(['success' => true]);
     }

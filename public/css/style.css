@@ -328,6 +328,8 @@ a:focus {
 }
 
 .feature_section {
+  justify-content: center;
+  align-items: center;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
 }
@@ -336,6 +338,7 @@ a:focus {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  justify-content: center;
 }
 
 .feature_section .feature_container .box {
@@ -860,6 +863,26 @@ a:focus {
 
 .carousel-indicators .active {
   background-color: #007bff; /* Warna indikator aktif */
+}
+
+.drag-area {
+  border: 2px dashed #0d6efd;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #f8f9fa;
+}
+
+.drag-area.drag-over {
+  background-color: #d9edf7;
+  border-color: #0d6efd;
+}
+
+.drag-area p {
+  margin: 0;
+  font-size: 16px;
+  color: #6c757d;
 }
 
 /*# sourceMappingURL=style.css.map */

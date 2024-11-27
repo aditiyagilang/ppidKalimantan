@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Objection;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Str;
+use App\Mail\CodeNotification;
+use App\Mail\StatusUpdateNotification;
+use Illuminate\Support\Facades\Mail;
+
 
 class ObjectionController extends Controller
 {
@@ -14,6 +19,11 @@ class ObjectionController extends Controller
     public function index()
     {
         return view('admin.keberatan.index');
+    }
+
+    public function publicForm()
+    {
+        return view('public.objectionForm');
     }
 
     /**
@@ -26,19 +36,39 @@ class ObjectionController extends Controller
 
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
-            'request_code' => 'required|unique:objections',
             'nik' => 'required',
-            'full_name' => 'required',
+            'name' => 'required',
+            'detail' => 'required',
             'reason' => 'required',
+            'file' => 'nullable|file|mimes:jpg,png,pdf|max:5000',
             'address' => 'required',
-            'phone_number' => 'required',
-            'case_position' => 'required',
-            'status' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
         ]);
 
-        Objection::create($request->all());
-        return redirect()->route('objections.index');
+        $filePath = $request->hasFile('file') 
+            ? $request->file('file')->store('uploads/files', 'public') 
+            : null;
+            
+        $randomCode = 'PKB' . Str::random(7);
+
+        Objection::create([
+            'code' => $randomCode,
+            'nik' => $request->nik,
+            'full_name' => $request->name,
+            'case_position' => $request->detail,
+            'reason' => $request->reason,
+            'file' => $filePath,
+            'address' => $request->address,
+            'email' => $request->email,
+            'phone_number' => $request->phone,
+        ]);
+
+        Mail::to($request->email)->send(new CodeNotification($randomCode));
+
+        return redirect()->route('public.index')->with('success', 'Berhasil mengajukan keberatan. Silahkan cek email anda untuk informasi lebih lanjut');
     }
 
     private function getStatusColor($status)
@@ -75,7 +105,7 @@ class ObjectionController extends Controller
                 return $statusDropdown;
             })
             ->addColumn('actions', function ($request) {
-                return '<button type="button" class="btn btn-info btn-sm detail-button" data-id="'.$request->id.'" data-ktp="'.$request->ktp_url.'" 
+                return '<button type="button" class="btn btn-info btn-sm detail-button" data-id="'.$request->id.'" data-nik="'.$request->nik.'" 
                             data-file="'.$request->file.'" data-name="'.$request->full_name.'" 
                             data-phone="'.$request->phone_number.'" data-address="'.$request->address.'" data-reason="'.$request->reason.'" data-case_position="'.$request->case_position.'">
                             Detail
@@ -126,6 +156,8 @@ class ObjectionController extends Controller
         $record->status = $validated['status'];
         $record->reject_reason = $validated['reject_reason'] ?? null;
         $record->save();
+
+        Mail::to($record->email)->send(new StatusUpdateNotification($record->status, $record->reject_reason));
 
         return response()->json(['success' => true]);
     }

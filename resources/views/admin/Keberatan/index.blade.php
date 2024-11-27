@@ -20,8 +20,6 @@
                 </div>
             </div>
             
-            <!-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addGalleryModal">Tambah</button> -->
-            
             <div class="table-responsive mt-3">
                 <table id="objectionTable" class="table table-striped table-xm" style="width:100%">
                     <thead>
@@ -50,15 +48,14 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-6">
+                                    <p><strong>NIK:</strong> <span id="detailNik"></span></p>
                                     <p><strong>Nama:</strong> <span id="detailName"></span></p>
                                     <p><strong>Telepon:</strong> <span id="detailPhone"></span></p>
                                     <p><strong>Alamat:</strong> <span id="detailAddress"></span></p>
-                                    <p><strong>Kasus Posisi:</strong> <span id="detailCase"></span></p>
-                                    <p><strong>Alasan Keberatan:</strong> <span id="detailReason"></span></p>
                                 </div>
                                 <div class="col-md-6">
-                                    <p><strong>KTP:</strong></p>
-                                    <img id="detailKTP" class="img-fluid rounded" alt="KTP">
+                                    <p><strong>Alasan Keberatan:</strong> <span id="detailReason"></span></p>
+                                    <p><strong>Kasus Posisi:</strong> <span id="detailCase"></span></p>
                                     <p><strong>File:</strong> <a id="detailFile" href="#" target="_blank">Download</a></p>
                                 </div>
                             </div>
@@ -87,6 +84,14 @@
 
         </div>
     </div>
+
+    <div id="loadingOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 9998;"></div>
+    <div id="loadingSpinner" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
 @endsection
 
 @push('scripts')
@@ -123,6 +128,9 @@
         });
 
         function updateStatus(requestId, status, rejectReason) {
+            $('#loadingOverlay').show();
+            $('#loadingSpinner').show();
+
             $.ajax({
                 url: '{{ route('objection.updateStatus') }}',
                 type: 'POST',
@@ -133,6 +141,9 @@
                     reject_reason: rejectReason
                 },
                 success: function(response) {
+                    $('#loadingOverlay').hide();
+                    $('#loadingSpinner').hide();
+                    
                     if (response.success) {
                         requestTable.ajax.reload(null, false);
                         alert('Status berhasil diperbarui');
@@ -164,6 +175,7 @@
 
     $(document).on('click', '.detail-button', function () {
         const id = $(this).data('id');
+        const nik = $(this).data('nik');
         const name = $(this).data('name');
         const phone = $(this).data('phone');
         const address = $(this).data('address');
@@ -172,13 +184,13 @@
         const ktpUrl = $(this).data('ktp');
         const fileUrl = $(this).data('file');
 
+        $('#detailNik').text(nik);
         $('#detailName').text(name);
         $('#detailPhone').text(phone);
         $('#detailAddress').text(address);
         $('#detailCase').text(case_position);
         $('#detailReason').text(reason);
-        $('#detailKTP').attr('src', ktpUrl ? ktpUrl : "{{asset('assets/ktp.png')}}");
-        $('#detailFile').attr('href', fileUrl);
+        $('#detailFile').attr('href', `storage/${fileUrl}`);
 
         $('#detailModal').modal('show');
     });

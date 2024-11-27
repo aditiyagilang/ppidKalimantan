@@ -18,6 +18,7 @@ class Objection extends Model
         'nik',
         'full_name',
         'address',
+        'email',
         'phone_number',
         'case_position',
         'reason',
