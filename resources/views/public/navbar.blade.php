@@ -51,26 +51,68 @@
               <li class="nav-item active">
                 <a class="nav-link" href="">Beranda <span class="sr-only">(current)</span></a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href=""> Profil</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="profilDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                  Profil
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="profilDropdown">
+                  <li><a class="dropdown-item" href="#">Visi dan Misi</a></li>
+                  <li><a class="dropdown-item" href="#">Struktur Organisasi</a></li>
+                </ul>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="">Informasi Publik</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="informasiDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                  Informasi Publik
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="informasiDropdown">
+                  <li><a class="dropdown-item" href="#">Kebijakan</a></li>
+                  <li><a class="dropdown-item" href="#">Laporan Tahunan</a></li>
+                </ul>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="">Standar Layanan</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="standarLayananDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                  Standar Layanan
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="standarLayananDropdown">
+                  <li><a class="dropdown-item" href="#">Standar Operasional</a></li>
+                  <li><a class="dropdown-item" href="#">Prosedur Layanan</a></li>
+                </ul>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="">Berita</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="beritaDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                  Berita
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="beritaDropdown">
+                  <li><a class="dropdown-item" href="#">Berita Terkini</a></li>
+                  <li><a class="dropdown-item" href="#">Arsip Berita</a></li>
+                </ul>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="">Laporan</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="laporanDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                  Laporan
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="laporanDropdown">
+                  <li><a class="dropdown-item" href="#">Laporan Keuangan</a></li>
+                  <li><a class="dropdown-item" href="#">Laporan Kinerja</a></li>
+                </ul>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="">Galeri</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="galeriDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                  Galeri
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="galeriDropdown">
+                  <li><a class="dropdown-item" href="#">Foto</a></li>
+                  <li><a class="dropdown-item" href="#">Video</a></li>
+                </ul>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="">Kontak</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="kontakDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                  Kontak
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="kontakDropdown">
+                  <li><a class="dropdown-item" href="#">Lokasi</a></li>
+                  <li><a class="dropdown-item" href="#">Hubungi Kami</a></li>
+                </ul>
               </li>
             </ul>
           </div>
