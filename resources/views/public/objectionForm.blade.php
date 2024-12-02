@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container mt-4">
+<div class="container" style="margin-top: 90px;">
     <div class="text-center mb-5">
         <h2 class="mb-1">Form Pengajuan Keberatan Informasi Publik</h2>
         <p class="text-muted">Silakan isi data di bawah ini dengan lengkap dan benar</p>
