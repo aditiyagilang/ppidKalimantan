@@ -17,6 +17,51 @@ class GalleryController extends Controller
         return view('admin.gallery.index');
     }
 
+    public function photosIndex()
+{
+
+    // Ambil data dengan type = 'foto'
+    $photos = Gallery::where('type', 'foto')->get();
+    // dd($photos);
+
+    // Tampilkan view dengan data foto
+    return view('public.galerry.foto', compact('photos'));
+}
+
+    public function videosIndex()
+{
+
+    // Ambil data dengan type = 'foto'
+    $videos = Gallery::where('type', 'video')->get();
+    // dd($photos);
+
+    // Tampilkan view dengan data foto
+    return view('public.galerry.video', compact('videos'));
+}
+
+    public function podcastIndex()
+{
+
+    // Ambil data dengan type = 'foto'
+    $podcasts = Gallery::where('type', 'podcast')->get();
+    // dd($photos);
+
+    // Tampilkan view dengan data foto
+    return view('public.galerry.podcast', compact('podcasts'));
+}
+
+    public function comicIndex()
+{
+
+    // Ambil data dengan type = 'foto'
+    $comics = Gallery::where('type', 'comic')->get();
+    // dd($photos);
+
+    // Tampilkan view dengan data foto
+    return view('public.galerry.comic', compact('comics'));
+}
+
+
     /**
      * Ambil data untuk DataTables.
      */
@@ -62,41 +107,42 @@ class GalleryController extends Controller
      * Tambahkan galeri baru.
      */
     public function store(Request $request)
-{
-    $request->validate([
-        'type' => 'required|string',
-        'title' => 'required|string',
-        'description' => 'nullable|string',
-        'date' => 'nullable|date',
-        'link' => 'required', // Link is required for both foto and other types
-    ]);
-
-    // Buat laporan baru
-    $gallery = new Gallery(); // Menggunakan model Gallery sesuai dengan yang Anda buat
-    $gallery->type = $request->type;
-    $gallery->title = $request->title;
-    $gallery->description = $request->description;
-    $gallery->date = $request->date;
-
-    // Periksa tipe dan atur input untuk link
-    if ($request->type === 'foto') {
-        // Proses gambar jika tipe foto
-        if ($request->hasFile('link')) {
-            $photo = $request->file('link');
-            $photoName = uniqid() . '_' . $photo->getClientOriginalName();
-            $photo->move(public_path('assets/foto'), $photoName);
-            $gallery->link = $photoName; // Menyimpan nama gambar
+    {
+        
+        $request->validate([
+            'type' => 'required|string',
+            'title' => 'required|string',
+            'description' => 'nullable|string',
+            'date' => 'nullable|date',
+            'link' => 'required', 
+        ]);
+    
+        $gallery = new Gallery();
+        $gallery->type = $request->type;
+        $gallery->title = $request->title;
+        $gallery->description = $request->description;
+        $gallery->date = $request->date;
+    
+        // Periksa tipe dan atur input untuk link
+        if ($request->type === 'foto') {
+            // Proses gambar jika tipe foto
+            if ($request->hasFile('link')) {
+                $photo = $request->file('link');
+                $photoName = uniqid() . '_' . $photo->getClientOriginalName();
+                $photo->move(public_path('assets/foto'), $photoName);
+                $gallery->link = 'assets/foto/' . $photoName; // Menyimpan nama gambar
+            }
+        } else {
+            // Jika tipe selain foto, simpan link URL
+            $gallery->link = $request->link;
         }
-    } else {
-        // Jika tipe selain foto, simpan link URL
-        $gallery->link = $request->link;
+    
+        // Simpan data galeri
+        $gallery->save();
+    
+        return redirect()->route('gallery.index')->with('success', 'Galeri berhasil disimpan!');
     }
-
-    // Simpan data galeri
-    $gallery->save();
-
-    return response()->json(['message' => 'Data berhasil disimpan!']);
-}
+    
 
 public function update(Request $request)
 {

@@ -17,6 +17,55 @@ class ReportController extends Controller
         return view('admin.report.index');
     }
 
+    public function keuanganIndex()
+{
+
+    // Ambil data dengan type = 'foto'
+    $finance = Report::where('type', 'finance') ->where('status', 'public')->get();
+    // dd($finance);
+
+    // Tampilkan view dengan data foto
+    return view('public.reports.keuangan', compact('finance'));
+}
+    public function kinerjaIndex()
+{
+
+    // Ambil data dengan type = 'foto'
+    $performance = Report::where('type', 'performance')
+    ->where('status', 'public')->get();
+    // dd($photos);
+
+    // Tampilkan view dengan data foto
+    return view('public.reports.kinerja', compact('performance'));
+}
+    public function penyelenggaraanIndex()
+{
+
+    // Ambil data dengan type = 'foto'
+    $administration = Report::where('type', 'administration')
+    ->where('status', 'public')
+    ->get();
+
+
+    // Tampilkan view dengan data foto
+    return view('public.reports.penyelenggaraan', compact('administration'));
+}
+
+
+    public function ppidIndex()
+{
+
+    // Ambil data dengan type = 'foto'
+    $ppid = Report::where('type', 'ppid')
+    ->where('status', 'public')
+    ->get();
+
+
+    // Tampilkan view dengan data foto
+    return view('public.reports.ppid', compact('ppid'));
+}
+
+
     /**
      * Ambil data untuk DataTables.
      */

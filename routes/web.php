@@ -11,6 +11,9 @@ use App\Http\Controllers\PublicInformationController;
 Route::get('/', function () {
     return view('public.index');
 })->name('public.index');
+Route::get('/news', function () {
+    return view('public.news.index');
+})->name('public.news.index');
 
 
 Route::get('login', [UserController::class, 'showLoginForm'])->name('login'); 
@@ -27,6 +30,7 @@ Route::post('request/store', [PublicInformationRequestController::class, 'store'
 Route::get('request/check', [PublicInformationRequestController::class, 'check'])->name('request.check');
 Route::get('request/status', [PublicInformationRequestController::class, 'status'])->name('request.status');
 
+Route::get('objection/form', [ObjectionController::class, 'publicForm'])->name('objection.form');
 Route::get('objection/form', [ObjectionController::class, 'publicForm'])->name('objection.form');
 Route::post('objection/store', [ObjectionController::class, 'store'])->name('objection.store');
 
@@ -74,6 +78,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('objection/data/{id}', [ObjectionController::class, 'destroy'])->name('objection.destroy');
 
 });
+
+
+
+Route::get('/gallery/photos', [GalleryController::class, 'photosIndex'])->name('gallery.photos');
+Route::get('/gallery/video', [GalleryController::class, 'videosIndex'])->name('gallery.video');
+Route::get('/gallery/podcast', [GalleryController::class, 'podcastIndex'])->name('gallery.podcast');
+Route::get('/gallery/comic', [GalleryController::class, 'comicIndex'])->name('gallery.comic');
+
+Route::get('/report/finance', [ReportController::class, 'keuanganIndex'])->name('report.finance');
+Route::get('/report/performance', [ReportController::class, 'kinerjaIndex'])->name('report.administration');
+Route::get('/report/administration', [ReportController::class, 'penyelenggaraanIndex'])->name('report.performance');
+Route::get('/report/ppid', [ReportController::class, 'ppidIndex'])->name('report.ppid');
+
 
 
 

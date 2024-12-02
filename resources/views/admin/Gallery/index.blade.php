@@ -97,7 +97,7 @@
                         <select class="form-control" id="galleryType" name="type" required>
                             <option value="foto">Foto</option>
                             <option value="video">Video</option>
-                            <option value="comic">Comic</option>
+                           
                             <option value="podcast">Podcast</option>
                         </select>
                     </div>
@@ -124,50 +124,58 @@
 
         <!-- Modal untuk Tambah Galeri -->
         <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <form action="{{ route('gallery.store') }}" method="POST" id="addGalleryForm">
-                    @csrf
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addModalLabel">Tambah Galeri</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="addTitle">Judul</label>
-                                <input type="text" class="form-control" id="addTitle" name="title" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="addLink">Link</label>
-                                <input type="text" class="form-control" id="addLink" name="link" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="addType">Type</label>
-                                <select class="form-control" id="addType" name="type" required>
-                                    <option value="foto">Foto</option>
-                                    <option value="video">Video</option>
-                                    <option value="comic">Comic</option>
-                                    <option value="podcast">Podcast</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="addDescription">Deskripsi</label>
-                                <textarea class="form-control" id="addDescription" name="description" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="addDate">Tanggal</label>
-                                <input type="date" class="form-control" id="addDate" name="date" required>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
+    <div class="modal-dialog modal-lg">
+        <form action="{{ route('gallery.store') }}" method="POST" id="addGalleryForm" enctype="multipart/form-data">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Tambah Galeri</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="addTitle">Judul</label>
+                        <input type="text" class="form-control" id="addTitle" name="title" required>
                     </div>
-                </form>
+                    <div class="form-group">
+                        <label for="addType">Type</label>
+                        <select class="form-control" id="addType" name="type" required onchange="toggleLinkInput()">
+                            <option value="foto">Foto</option>
+                            <option value="video">Video</option>
+                         
+                            <option value="podcast">Podcast</option>
+                        </select>
+                    </div>
+
+                    <!-- Input untuk link atau upload file foto -->
+                    <div class="form-group" id="addLinkGroup">
+                        <label for="addLink">Link</label>
+                        <input type="text" class="form-control" id="addLink" name="link" required>
+                    </div>
+                    
+                    <!-- Input untuk foto -->
+                    <div class="form-group" id="addPhotoGroup" style="display: none;">
+                        <label for="addPhoto">Foto</label>
+                        <input type="file" class="form-control" id="addPhoto" name="link">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="addDescription">Deskripsi</label>
+                        <textarea class="form-control" id="addDescription" name="description" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="addDate">Tanggal</label>
+                        <input type="date" class="form-control" id="addDate" name="date" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
             </div>
-        </div>
+        </form>
+    </div>
+</div>
     </div>
 </div>
 
@@ -285,5 +293,30 @@
         });
 
     });
+</script>
+
+<script>
+    function toggleLinkInput() {
+        var type = document.getElementById("addType").value;
+        var linkGroup = document.getElementById("addLinkGroup");
+        var photoGroup = document.getElementById("addPhotoGroup");
+        var addLink = document.getElementById("addLink");
+        var addPhoto = document.getElementById("addPhoto");
+
+        if (type === "foto") {
+            linkGroup.style.display = "none"; // Sembunyikan input link
+            addLink.disabled = true; // Nonaktifkan input link
+            photoGroup.style.display = "block"; // Tampilkan input foto
+            addPhoto.disabled = false; // Aktifkan input foto
+        } else {
+            linkGroup.style.display = "block"; // Tampilkan input link
+            addLink.disabled = false; // Aktifkan input link
+            photoGroup.style.display = "none"; // Sembunyikan input foto
+            addPhoto.disabled = true; // Nonaktifkan input foto
+        }
+    }
+
+    // Panggil fungsi untuk set tampilan yang benar saat halaman dimuat
+    toggleLinkInput();
 </script>
 @endpush

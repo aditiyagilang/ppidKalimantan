@@ -20,7 +20,69 @@
   <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/responsive.css') }}" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.bootstrap5.css">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">  
+
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
+<!-- Libraries Stylesheet -->
+<link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+<!-- Customized Bootstrap Stylesheet -->
+<link href="css/style1.css" rel="stylesheet">
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<style>
+  #news-container {
+  height: 100vh;            /* Mengatur tinggi container menjadi 100% dari viewport height */
+  overflow-y: auto;         /* Menambahkan scroll vertikal jika konten melebihi tinggi container */
+  padding: 10px;            /* Memberikan jarak di sekitar konten */
+}
+
+.news-item {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  margin-bottom: 15px;
+}
+
+.news-item img {
+  width: 80px;              /* Mengurangi ukuran gambar */
+  height: 80px;             /* Menyesuaikan ukuran gambar */
+  object-fit: cover;        /* Memastikan gambar tidak terdistorsi */
+  margin-right: 15px;       /* Memberikan jarak antara gambar dan teks */
+}
+
+.news-item .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.news-item .title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  margin-bottom: 5px;
+}
+
+.news-item .date {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+  </style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 </head>
 
 <body>
@@ -153,6 +215,17 @@
   <!-- Google Map -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
   <!-- End Google Map -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">  
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+
+  <!-- Template Javascript -->
+  <script src="js/main.js"></script>
 
   @if (session('success'))
       <script>
