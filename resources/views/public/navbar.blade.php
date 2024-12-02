@@ -20,9 +20,11 @@
   <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/responsive.css') }}" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.bootstrap5.css">
 </head>
 
 <body>
+<div class="wrapper">
   <div class="hero_area">
     <!-- header section strats -->
     <header class="header_section">
@@ -124,7 +126,7 @@
     <!-- end header section -->
   </div>
 
-  <div class="">
+  <div class="content">
       @yield('content')
   </div>
 
@@ -137,6 +139,7 @@
       </p>
     </div>
   </footer>
+</div>
   <!-- footer section -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
@@ -145,6 +148,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="{{ asset('js/custom.js') }}"></script>
+  <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
+  <script src="https://cdn.datatables.net/2.1.7/js/dataTables.bootstrap5.js"></script>
   <!-- Google Map -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
   <!-- End Google Map -->

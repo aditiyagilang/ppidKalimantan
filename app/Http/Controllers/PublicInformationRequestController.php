@@ -25,6 +25,34 @@ class PublicInformationRequestController extends Controller
         return view('public.informationForm');
     }
 
+    public function check()
+    {
+        return view('public.informationCheck');
+    }
+
+    public function status(Request $request)
+    {
+        $nik = $request->query('nik');
+        $requestCode = $request->query('request_code');
+
+        $result = PublicInformationRequest::where('nik', $nik)
+            ->where('code', $requestCode)
+            ->first();
+
+        if ($result) {
+            return response()->json([
+                'success' => true,
+                'status' => $result->status,
+                'reason' => $result->reject_reason,
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Data tidak ditemukan.',
+        ]);
+    }
+
     private function getStatusColor($status)
     {
         switch ($status) {

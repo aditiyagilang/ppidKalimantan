@@ -26,6 +26,34 @@ class ObjectionController extends Controller
         return view('public.objectionForm');
     }
 
+    public function check()
+    {
+        return view('public.objectionCheck');
+    }
+
+    public function status(Request $request)
+    {
+        $nik = $request->query('nik');
+        $objectionCode = $request->query('objection_code');
+
+        $objection = Objection::where('nik', $nik)
+            ->where('code', $objectionCode)
+            ->first();
+
+        if ($objection) {
+            return response()->json([
+                'success' => true,
+                'status' => $objection->status,
+                'reason' => $objection->reject_reason,
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Data tidak ditemukan.',
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

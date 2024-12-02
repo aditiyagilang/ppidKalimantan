@@ -1,7 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather+Sans:wght@400;700&display=swap");
-body {
-  font-family: 'Lato', sans-serif;
+html, body {
+  font-family:  sans-serif;
   color: #040000;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  flex: 1;
+}
+
+.content {
+  flex: 1; /* Membuat area konten fleksibel */
 }
 
 .layout_padding {
@@ -915,4 +933,12 @@ a:focus {
   margin-top: 0; /* Pastikan dropdown muncul di posisi yang benar */
 }
 
+.footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  text-align: center;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+}
 /*# sourceMappingURL=style.css.map */

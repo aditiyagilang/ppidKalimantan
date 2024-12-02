@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\PublicInformation;
+use App\Models\Report;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -82,101 +83,96 @@ class PublicInformationController extends Controller
     }
 
     public function update(Request $request)
-{
+    {
 
-    // dd($request->all());
-    $request->validate([
-        'id' => 'required',
-        'name_pd_okpd' => 'required|string',
-        'document_name' => 'required|string',
-        'creation_year' => 'required',
-   
-       
-        'file_type' => 'required',
-        'file_size' => 'required',
-        'file' => 'nullable',
-    ]);
-    // dd($request->all());
-
-    // Ambil laporan berdasarkan ID
-    $document = PublicInformation::findOrFail($request->id);
-    $document->name_pd_okpd = $request->name_pd_okpd;
-    $document->document_name = $request->document_name;
-    $document->creation_year = $request->creation_year;
-    $document->file_type = $request->file_type;
-    $document->file_size = $request->file_size;
-   
-
-    // Proses file lainnya jika ada
-    if ($request->hasFile('file')) {
-        // Hapus file lama jika ada
-        if ($document->file && file_exists(public_path('assets/file/' . $document->file))) {
-            unlink(public_path('assets/file/' . $document->file));
-        }
-
-        // Simpan file baru
-        $file = $request->file('file');
-        $fileName = uniqid() . '_' . $file->getClientOriginalName();
-        $file->move(public_path('assets/file'), $fileName);
-        $document->file = $fileName;
-    }
-
-    // Simpan perubahan
-    $document->save();
-
-    return response()->json(['message' => 'Laporan berhasil diperbarui!']);
-}
-
-
-public function store(Request $request)
-{
-
+        // dd($request->all());
+        $request->validate([
+            'id' => 'required',
+            'name_pd_okpd' => 'required|string',
+            'document_name' => 'required|string',
+            'creation_year' => 'required',
     
-    $request->validate([
-        'name_pd_okpd' => 'required|string',
-        'document_name' => 'required|string',
-        'creation_year' => 'required',
-        'file_type' => 'required',
-        'file_size' => 'required',
-        'file' => 'nullable', // Validasi file
-    ]);
-    // dd($request->all());
-
-    // Buat instance baru PublicInformation
-    $document = new PublicInformation();
-    $document->name_pd_okpd = $request->name_pd_okpd;
-    $document->document_name = $request->document_name;
-    $document->creation_year = $request->creation_year;
-    $document->file_type = $request->file_type;
-    $document->file_size = $request->file_size;
-
-    // Proses file
-    if ($request->hasFile('file')) {
-        $file = $request->file('file');
-        $fileName = uniqid() . '_' . $file->getClientOriginalName();
         
-        // Buat folder jika belum ada
-        if (!file_exists(public_path('assets/file'))) {
-            mkdir(public_path('assets/file'), 0777, true);
+            'file_type' => 'required',
+            'file_size' => 'required',
+            'file' => 'nullable',
+        ]);
+        // dd($request->all());
+
+        // Ambil laporan berdasarkan ID
+        $document = PublicInformation::findOrFail($request->id);
+        $document->name_pd_okpd = $request->name_pd_okpd;
+        $document->document_name = $request->document_name;
+        $document->creation_year = $request->creation_year;
+        $document->file_type = $request->file_type;
+        $document->file_size = $request->file_size;
+    
+
+        // Proses file lainnya jika ada
+        if ($request->hasFile('file')) {
+            // Hapus file lama jika ada
+            if ($document->file && file_exists(public_path('assets/file/' . $document->file))) {
+                unlink(public_path('assets/file/' . $document->file));
+            }
+
+            // Simpan file baru
+            $file = $request->file('file');
+            $fileName = uniqid() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('assets/file'), $fileName);
+            $document->file = $fileName;
         }
 
-        // Pindahkan file ke folder
-        $file->move(public_path('assets/file'), $fileName);
-        $document->file = $fileName;
+        // Simpan perubahan
+        $document->save();
+
+        return response()->json(['message' => 'Laporan berhasil diperbarui!']);
     }
 
-    // Simpan ke database
-    $document->save();
 
-    return response()->json([
-        'message' => 'Laporan berhasil ditambahkan!',
-        'data' => $document,
-    ], 201);
-}
+    public function store(Request $request)
+    {
 
+        $request->validate([
+            'name_pd_okpd' => 'required|string',
+            'document_name' => 'required|string',
+            'creation_year' => 'required',
+            'file_type' => 'required',
+            'file_size' => 'required',
+            'file' => 'nullable', // Validasi file
+        ]);
+        // dd($request->all());
 
+        // Buat instance baru PublicInformation
+        $document = new PublicInformation();
+        $document->name_pd_okpd = $request->name_pd_okpd;
+        $document->document_name = $request->document_name;
+        $document->creation_year = $request->creation_year;
+        $document->file_type = $request->file_type;
+        $document->file_size = $request->file_size;
 
+        // Proses file
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = uniqid() . '_' . $file->getClientOriginalName();
+            
+            // Buat folder jika belum ada
+            if (!file_exists(public_path('assets/file'))) {
+                mkdir(public_path('assets/file'), 0777, true);
+            }
 
+            // Pindahkan file ke folder
+            $file->move(public_path('assets/file'), $fileName);
+            $document->file = $fileName;
+        }
+
+        // Simpan ke database
+        $document->save();
+
+        return response()->json([
+            'message' => 'Laporan berhasil ditambahkan!',
+            'data' => $document,
+        ], 201);
+    }
 
     /**
      * Hapus laporan.
@@ -199,5 +195,28 @@ public function store(Request $request)
             'public' => '#5cb85c',  // Hijau
             default => '#ddd',     // Abu-abu
         };
+    }
+
+    public function public()
+    {
+        return view('public.informationPublic');
+    }
+
+    public function data()
+    {
+        $query = PublicInformation::query();
+        
+        return DataTables::of($query)
+        ->addColumn('download', function ($request) {
+            if ($request->file) {
+                return '<a href="'.asset('assets/file/'.$request->file).'" class="btn btn-success btn-sm" download>
+                            <i class="fa fa-download"></i> Download
+                        </a>';
+            }
+            return '<span class="text-muted">No file</span>';
+        })
+        ->rawColumns(['download'])
+        ->make(true);
+
     }
 }

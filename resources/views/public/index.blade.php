@@ -75,6 +75,20 @@
               </div>
               <div class="detail-box">
                 <h5>
+                  Form Pengajuan Keberatan
+                </h5>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col mx-auto">
+          <a href="{{ route('public.info') }}" class="text-decoration-none text-dark">
+            <div class="box rounded-lg d-flex flex-column">
+              <div class="img-box">
+                <img src="images/s1.png" alt="" />
+              </div>
+              <div class="detail-box">
+                <h5>
                   Daftar Informasi Public PPID Perangkat Daerah
                 </h5>
               </div>
@@ -82,40 +96,32 @@
           </a>
         </div>
         <div class="col mx-auto">
-          <div class="box rounded-lg d-flex flex-column">
-            <div class="img-box">
-              <img src="images/s1.png" alt="" />
+          <a href="{{ route('request.check') }}" class="text-decoration-none text-dark">
+            <div class="box rounded-lg d-flex flex-column">
+              <div class="img-box">
+                <img src="images/s2.png" alt="" />
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Cek Status Permohonan Informasi Publik
+                </h5>
+              </div>
             </div>
-            <div class="detail-box">
-              <h5>
-                Daftar Informasi Public PPID Perangkat Daerah
-              </h5>
-            </div>
-          </div>
+          </a>
         </div>
         <div class="col mx-auto">
-          <div class="box rounded-lg d-flex flex-column">
-            <div class="img-box">
-              <img src="images/s2.png" alt="" />
+          <a href="{{ route('objection.check') }}" class="text-decoration-none text-dark">
+            <div class="box rounded-lg d-flex flex-column">
+              <div class="img-box">
+                <img src="images/s3.png" alt="" />
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Cek Status Pengajuan Keberatan Informasi Publik
+                </h5>
+              </div>
             </div>
-            <div class="detail-box">
-              <h5>
-                Cek Status Permohonan Informasi Publik
-              </h5>
-            </div>
-          </div>
-        </div>
-        <div class="col mx-auto">
-          <div class="box rounded-lg d-flex flex-column">
-            <div class="img-box">
-              <img src="images/s3.png" alt="" />
-            </div>
-            <div class="detail-box">
-              <h5>
-                Cek Status Pengajuan Keberatan Informasi Publik
-              </h5>
-            </div>
-          </div>
+          </a>
         </div>
       </div>
       <div class="btn-box">
