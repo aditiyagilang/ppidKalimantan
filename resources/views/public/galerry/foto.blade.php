@@ -12,8 +12,8 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="section-title">
-                                <h4 class="m-0 text-uppercase font-weight-bold">Category: Business</h4>
-                                <a class="text-secondary font-weight-medium text-decoration-none" href="">View All</a>
+                                <h4 class="m-0 text-uppercase font-weight-bold">Gallery Foto</h4>
+                               
                             </div>
                         </div>
                         @foreach($photos as $photo)

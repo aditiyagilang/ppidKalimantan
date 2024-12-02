@@ -10,6 +10,12 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="row">
+                    <div class="col-12">
+                            <div class="section-title">
+                                <h4 class="m-0 text-uppercase font-weight-bold">Gallery Podcast</h4>
+                               
+                            </div>
+                        </div>
                        
                         @foreach($podcasts as $podcast)
                             <div class="col-lg-3">

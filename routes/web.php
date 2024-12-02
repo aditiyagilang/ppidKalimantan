@@ -72,10 +72,15 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::get('/admin/gallery/photos', [GalleryController::class, 'photosIndex'])->name('gallery.photos');
-Route::get('/admin/gallery/video', [GalleryController::class, 'videosIndex'])->name('gallery.video');
-Route::get('/admin/gallery/podcast', [GalleryController::class, 'podcastIndex'])->name('gallery.podcast');
-Route::get('/admin/gallery/comic', [GalleryController::class, 'comicIndex'])->name('gallery.comic');
+Route::get('/gallery/photos', [GalleryController::class, 'photosIndex'])->name('gallery.photos');
+Route::get('/gallery/video', [GalleryController::class, 'videosIndex'])->name('gallery.video');
+Route::get('/gallery/podcast', [GalleryController::class, 'podcastIndex'])->name('gallery.podcast');
+Route::get('/gallery/comic', [GalleryController::class, 'comicIndex'])->name('gallery.comic');
+
+Route::get('/report/finance', [ReportController::class, 'keuanganIndex'])->name('report.finance');
+Route::get('/report/performance', [ReportController::class, 'kinerjaIndex'])->name('report.administration');
+Route::get('/report/administration', [ReportController::class, 'penyelenggaraanIndex'])->name('report.performance');
+Route::get('/report/ppid', [ReportController::class, 'ppidIndex'])->name('report.ppid');
 
 
 
