@@ -1,7 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather+Sans:wght@400;700&display=swap");
-body {
-  font-family: 'Lato', sans-serif;
+html, body {
+  font-family:  sans-serif;
   color: #040000;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  flex: 1;
+}
+
+.content {
+  flex: 1; /* Membuat area konten fleksibel */
 }
 
 .layout_padding {
@@ -77,6 +95,20 @@ a:focus {
 }
 
 /*header section*/
+.header_section {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10; /* Agar tetap di atas carousel */
+  background-color: rgba(252, 252, 252, 0.9); /* Warna putih dengan transparansi */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan agar terlihat lebih jelas */
+}
+
+.header_section.scrolled {
+  background-color: rgba(255, 255, 255, 1); /* Solid */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan untuk efek */
+}
+
 .hero_area {
   position: relative;
   background-color: #d1e3ff;
@@ -338,6 +370,7 @@ a:focus {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
@@ -839,6 +872,16 @@ a:focus {
 }
 
 /* end footer section*/
+.carousel-item {
+  transform: scale(0.8);
+  transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+  opacity: 0;
+}
+
+.carousel-item.active {
+  transform: scale(1);
+  opacity: 1;
+}
 
 .carousel-item img {
   height: 500px; /* Sesuaikan dengan kebutuhan Anda */
@@ -885,4 +928,17 @@ a:focus {
   color: #6c757d;
 }
 
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0; /* Pastikan dropdown muncul di posisi yang benar */
+}
+
+.footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  text-align: center;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+}
 /*# sourceMappingURL=style.css.map */

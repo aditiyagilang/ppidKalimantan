@@ -24,8 +24,17 @@ Route::resource('public_information_requests', PublicInformationRequestControlle
 Route::get('request/form', [PublicInformationRequestController::class, 'publicForm'])->name('request.form');
 Route::post('request/store', [PublicInformationRequestController::class, 'store'])->name('request.store');
 
+Route::get('request/check', [PublicInformationRequestController::class, 'check'])->name('request.check');
+Route::get('request/status', [PublicInformationRequestController::class, 'status'])->name('request.status');
+
 Route::get('objection/form', [ObjectionController::class, 'publicForm'])->name('objection.form');
 Route::post('objection/store', [ObjectionController::class, 'store'])->name('objection.store');
+
+Route::get('objection/check', [ObjectionController::class, 'check'])->name('objection.check');
+Route::get('objection/status', [ObjectionController::class, 'status'])->name('objection.status');
+
+Route::get('public-information', [PublicInformationController::class, 'public'])->name('public.info');
+Route::get('public-information/data', [PublicInformationController::class, 'data'])->name('public.data');
 
 Route::middleware('auth')->group(function () {
     Route::get('/gallery', [GalleryController::class, 'index'])->name('galleries.index');

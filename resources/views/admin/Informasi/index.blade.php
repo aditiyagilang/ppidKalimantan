@@ -106,7 +106,7 @@
             scrollX: true,
             responsive: true,
             ajax: {
-                url: '{{ route('request.data') }}',
+                url: "{{ route('request.data') }}",
                 type: 'GET',
             },
             columns: [
@@ -137,7 +137,7 @@
             $('#loadingSpinner').show();
 
             $.ajax({
-                url: '{{ route('request.updateStatus') }}',
+                url: "{{ route('request.updateStatus') }}",
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
