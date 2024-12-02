@@ -11,6 +11,9 @@ use App\Http\Controllers\PublicInformationController;
 Route::get('/', function () {
     return view('public.index');
 })->name('public.index');
+Route::get('/news', function () {
+    return view('public.news.index');
+})->name('public.news.index');
 
 
 Route::get('login', [UserController::class, 'showLoginForm'])->name('login'); 
@@ -24,6 +27,7 @@ Route::resource('public_information_requests', PublicInformationRequestControlle
 Route::get('request/form', [PublicInformationRequestController::class, 'publicForm'])->name('request.form');
 Route::post('request/store', [PublicInformationRequestController::class, 'store'])->name('request.store');
 
+Route::get('objection/form', [ObjectionController::class, 'publicForm'])->name('objection.form');
 Route::get('objection/form', [ObjectionController::class, 'publicForm'])->name('objection.form');
 Route::post('objection/store', [ObjectionController::class, 'store'])->name('objection.store');
 
@@ -65,6 +69,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('objection/data/{id}', [ObjectionController::class, 'destroy'])->name('objection.destroy');
 
 });
+
+
+
+Route::get('/admin/gallery/photos', [GalleryController::class, 'photosIndex'])->name('gallery.photos');
+Route::get('/admin/gallery/video', [GalleryController::class, 'videosIndex'])->name('gallery.video');
+Route::get('/admin/gallery/podcast', [GalleryController::class, 'podcastIndex'])->name('gallery.podcast');
+Route::get('/admin/gallery/comic', [GalleryController::class, 'comicIndex'])->name('gallery.comic');
+
 
 
 
