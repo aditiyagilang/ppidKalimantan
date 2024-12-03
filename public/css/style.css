@@ -23,7 +23,7 @@ html, body {
 }
 
 .layout_padding {
-  padding-top: 120px;
+  padding-top: 80px;
   padding-bottom: 120px;
 }
 
@@ -142,7 +142,7 @@ a:focus {
 }
 
 .header_section .header_bottom {
-  padding: 10px 0;
+  padding: 0;
 }
 
 .navbar-brand {
@@ -473,7 +473,9 @@ a:focus {
 }
 
 .professional_section {
-  background-color: #d1e3ff;
+  background-color: #e1e1e1;
+  justify-content: center;
+  align-items: center;
 }
 
 .professional_section .row {
@@ -940,5 +942,70 @@ a:focus {
   width: 100%;
   position: relative;
   bottom: 0;
+}
+
+.circle-box {
+  width: 200px;
+  height: 200px;
+  background-color: #0a0f43; /* Warna lingkaran */
+  color: rgb(255, 255, 255);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.circle-number {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.circle-box p {
+  margin: 5px 0 0;
+  font-size: 1rem;
+}
+
+.awards_section img {
+  width: 100%; /* Gambar menyesuaikan kolom */
+  max-width: 200px; /* Ukuran maksimal gambar */
+  height: auto;
+  border: none; 
+}
+
+.awards_section p.keterangan {
+  font-size: 14px;
+  font-weight: bold; /* Gunakan font-weight untuk tebal */
+  margin-top: 10px;
+  color: #333;
+}
+
+.awards_section p.tahun {
+  font-size: 14px;
+  font-weight: normal; /* Normal untuk teks biasa */
+  margin-top: 5px;
+  color: #555; /* Warna sedikit berbeda untuk membedakan */
+}
+
+
+.carousel-control-prev, .carousel-control-next {
+  width: 5%; /* Mengurangi lebar tombol navigasi */
+  z-index: 10; /* Memastikan tombol berada di atas gambar */
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.3); /* Memberikan latar belakang transparan */
+  border-radius: 50%; /* Membuat tombol berbentuk lingkaran */
+}
+
+.carousel-inner img {
+  border: none; /* Menghilangkan batas kotak pada gambar */
+}
+
+.carousel-item {
+  text-align: center;
 }
 /*# sourceMappingURL=style.css.map */

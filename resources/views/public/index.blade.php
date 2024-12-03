@@ -48,7 +48,7 @@
   </button>
 </div>
 
-<div class="container">
+<div class="container my-4">
 
   <div class="service_section">
     <div class=" ">
@@ -128,52 +128,103 @@
       </div>
     </div>
   </div>
-  
-  <div class="about_section layout_padding-bottom">
-    <div class="row">
-      <div class="col-lg-5 col-md-6">
-        <div class="detail-box">
-          <h2>
-            About us
-          </h2>
-          <p>
-            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomisedThere are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised
-          </p>
-          <a href="">
-            Read More
-          </a>
-        </div>
-      </div>
-      <div class="col-lg-7 col-md-6">
-        <div class="img-box">
-          <img src="images/about-img.jpg" alt="">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-6">
-      <div class="img-box">
-        <img src="images/professional-img.png" alt="">
-      </div>
-    </div>
-    <div class="col-md-6 ">
-      <div class="detail-box">
-        <h2>
-          We Provide Professional <br>
-          Home Services.
-        </h2>
-        <p>
-          randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All randomised words which don't look even slightly
-        </p>
-        <a href="">
-          Read More
-        </a>
-      </div>
-    </div>
-  </div>
 </div>
+
+<section class="professional_section layout_padding">
+  <div class="container py-3">
+    <div class="col-12 d-flex justify-content-center align-items-center mb-4">
+      <h4 class="circle-number">Statistik Layanan Informasi Publik</h4>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="circle-box">
+          <h3 class="circle-number text-warning">150</h3>
+          <p>Daftar Informasi Publik</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="circle-box">
+          <h3 class="circle-number text-warning">75</h3>
+          <p>Permohonan</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="circle-box">
+          <h3 class="circle-number text-warning">10</h3>
+          <p>Keberatan</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="circle-box">
+          <h3 class="circle-number text-warning">65</h3>
+          <p>Permohonan Selesai</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="awards_section layout_padding">
+  <div class="container py-3">
+    <h3 class="text-center mb-4">Penghargaan</h3>
+    <div id="awardsCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <img src="{{ asset('assets/Icon-Anugerah-2018.png') }}" alt="Award 1" class="img-fluid">
+              <p class="keterangan">Badan Publik Pemerintah Provinsi dengan Kualifikasi Informatif</p>
+              <p class="tahun">Tahun 2018</p>
+            </div>
+            <div class="col-md-4 text-center">
+            <img src="{{ asset('assets/Icon-Anugerah-2019.png') }}" alt="Award 1" class="img-fluid">
+              <p class="keterangan">Badan Publik Pemerintah Provinsi dengan Kualifikasi Informatif</p>
+              <p class="tahun text-bold">Tahun 2019</p>
+            </div>
+            <div class="col-md-4 text-center">
+            <img src="{{ asset('assets/Icon-Anugerah-2020.png') }}" alt="Award 1" class="img-fluid">
+              <p class="keterangan">Badan Publik Pemerintah Provinsi dengan Kualifikasi Informatif</p>
+              <p class="tahun text-bold">Tahun 2020</p>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+          <div class="row">
+            <div class="col-md-4 text-center">
+            <img src="{{ asset('assets/Icon-Anugerah-2021.png') }}" alt="Award 1" class="img-fluid">
+              <p class="keterangan">Badan Publik Pemerintah Provinsi dengan Kualifikasi Informatif</p>
+              <p class="tahun text-bold">Tahun 2021</p>
+            </div>
+            <div class="col-md-4 text-center">
+            <img src="{{ asset('assets/Icon-Anugerah-2022.png') }}" alt="Award 1" class="img-fluid">
+              <p class="keterangan">Badan Publik Pemerintah Provinsi dengan Kualifikasi Informatif</p>
+              <p class="tahun text-bold">Tahun 2022</p>
+            </div>
+            <div class="col-md-4 text-center">
+            <img src="{{ asset('assets/Icon-Anugerah-2023.png') }}" alt="Award 1" class="img-fluid">
+              <p class="keterangan">Badan Publik Pemerintah Provinsi dengan Kualifikasi Informatif</p>
+              <p class="tahun text-bold">Tahun 2023</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Carousel Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#awardsCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#awardsCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</section>
+
 
 @endsection
 
@@ -185,5 +236,15 @@
     var carousel = new bootstrap.Carousel(carouselElement);
   }
 });  
+
+function scrollAwards(direction) {
+  const container = document.querySelector('.awards-carousel');
+  const scrollAmount = 200; // Sesuaikan jarak scroll
+  if (direction === 'left') {
+    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  } else {
+    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  }
+}
 </script>
 @endpush

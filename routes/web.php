@@ -11,10 +11,66 @@ use App\Http\Controllers\PublicInformationController;
 Route::get('/', function () {
     return view('public.index');
 })->name('public.index');
+
 Route::get('/news', function () {
     return view('public.news.index');
 })->name('public.news.index');
 
+Route::get('/profile-ppid', function () {
+    return view('public.profil.profilePpid');
+})->name('profile-ppid');
+
+Route::get('/visi-misi', function () {
+    return view('public.profil.visiMisi');
+})->name('visimisi-ppid');
+
+Route::get('/struktur-organisasi', function () {
+    return view('public.profil.strukturOrganisasi');
+})->name('struktur-ppid');
+
+Route::get('/dasar-hukum', function () {
+    return view('public.profil.dasarHukum');
+})->name('dasar-hukum');
+
+Route::get('/tata-cara-permohonan-informasi', function () {
+    return view('public.standarPelayanan.informasi');
+})->name('standar-informasi');
+
+Route::get('/tata-cara-keberatan-informasi', function () {
+    return view('public.standarPelayanan.keberatan');
+})->name('standar-keberatan');
+
+Route::get('/tata-cara-penyelesaian-sengketa', function () {
+    return view('public.standarPelayanan.sengketa');
+})->name('standar-sengketa');
+
+Route::get('/maklumat', function () {
+    return view('public.standarPelayanan.maklumat');
+})->name('standar-maklumat');
+
+Route::get('/sop', function () {
+    return view('public.standarPelayanan.sop');
+})->name('standar-sop');
+
+Route::get('/dip-provinsi', function () {
+    return view('public.standarPelayanan.dipProv');
+})->name('standar-dip');
+
+Route::get('/informasi-public-berkala', function () {
+    return view('public.informasiPublic.berkala');
+})->name('info-berkala');
+
+Route::get('/informasi-public-dikecualikan', function () {
+    return view('public.informasiPublic.dikecualikan');
+})->name('info-dikecualikan');
+
+Route::get('/informasi-public-setiap-saat', function () {
+    return view('public.informasiPublic.setiapSaat');
+})->name('info-setiap-saat');
+
+Route::get('/informasi-public-serta-merta', function () {
+    return view('public.informasiPublic.sertaMerta');
+})->name('info-serta-merta');
 
 Route::get('login', [UserController::class, 'showLoginForm'])->name('login'); 
 Route::post('login', [UserController::class, 'login']); 

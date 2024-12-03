@@ -18,7 +18,7 @@
                     <select class="form-select" name="type" id="kategoriPermohonan">
                         <option value="individual">Perorangan</option>
                         <option value="organization">Lembaga / Organisasi</option>
-                        <option value="goup">Kelompok Orang</option>
+                        <option value="group">Kelompok Orang</option>
                     </select>
                 </div>
                 
