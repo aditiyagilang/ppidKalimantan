@@ -7,6 +7,8 @@ use App\Http\Controllers\ObjectionController;
 use App\Http\Controllers\PublicInformationRequestController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PublicInformationController;
+use App\Http\Controllers\NewsController;
+use Illuminate\Support\Facades\Http;
 
 Route::get('/', function () {
     return view('public.index');
@@ -15,6 +17,10 @@ Route::get('/', function () {
 Route::get('/news', function () {
     return view('public.news.index');
 })->name('public.news.index');
+
+Route::get('/contact', function () {
+    return view('public.news.contact');
+})->name('public.news.contact');
 
 Route::get('/profile-ppid', function () {
     return view('public.profil.profilePpid');
@@ -71,6 +77,8 @@ Route::get('/informasi-public-setiap-saat', function () {
 Route::get('/informasi-public-serta-merta', function () {
     return view('public.informasiPublic.sertaMerta');
 })->name('info-serta-merta');
+
+Route::get('fetch-news', [NewsController::class, 'fetchNews'])->name('fetch-news');
 
 Route::get('login', [UserController::class, 'showLoginForm'])->name('login'); 
 Route::post('login', [UserController::class, 'login']); 

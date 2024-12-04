@@ -89,7 +89,7 @@
                         <div class="section-title mb-0">
                             <h4 class="m-0 text-uppercase font-weight-bold">Trending News</h4>
                         </div>
-                        <div id="news-container"></div>
+                        <div id="newsContainer" style="height: 100vh; overflow-y: auto;"></div>
 
                     </div>
 
@@ -113,66 +113,39 @@
 
     @push('scripts')
     <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const apiKey = "e9a061f5446641d49dfa04619400cf3e"; // API key Anda
-    const apiUrl = `https://newsapi.org/v2/everything?q=tesla&from=2024-11-02&sortBy=publishedAt&apiKey=${apiKey}`;
+    $(document).ready(function() {
+        // Mengambil data saat halaman dimuat
+        $.ajax({
+            url: '{{ route('fetch-news') }}',  // Gantilah dengan URL yang sesuai
+            method: 'GET',
+            success: function(response) {
+                console.log(response);
 
-    // Fungsi untuk mengambil data berita
-    async function fetchNews() {
-        try {
-            const response = await fetch(apiUrl);
-            const data = await response.json();
-
-            if (data.status === 'ok') {
-                const newsContainer = document.getElementById('news-container');
-                newsContainer.innerHTML = ''; // Mengosongkan kontainer sebelum menambahkan berita baru
-
-                // Loop untuk menampilkan setiap berita
-                data.articles.forEach((article) => {
-                    const newsItem = document.createElement('div');
-                    newsItem.classList.add('news-item');
-
-                    // Thumbnail Gambar
-                    const img = document.createElement('img');
-                    img.classList.add('img-fluid');
-                    img.src = article.urlToImage ? article.urlToImage : 'img/news-110x110-1.jpg'; // Jika tidak ada gambar, menggunakan default
-                    img.alt = 'Thumbnail Berita';
-                    newsItem.appendChild(img);
-
-                    // Konten Berita
-                    const contentDiv = document.createElement('div');
-                    contentDiv.classList.add('content');
-
-                    // Tanggal dan Kategori
-                    const dateDiv = document.createElement('div');
-                    dateDiv.classList.add('date');
-                    dateDiv.innerHTML = `<small>${new Date(article.publishedAt).toLocaleDateString()}</small>`;
-                    contentDiv.appendChild(dateDiv);
-
-                    // Judul Berita
-                    const title = document.createElement('a');
-                    title.classList.add('title');
-                    title.href = article.url; // Link ke artikel penuh
-                    title.target = '_blank';
-                    title.textContent = article.title;
-                    contentDiv.appendChild(title);
-
-                    // Menambahkan konten ke dalam item berita
-                    newsItem.appendChild(contentDiv);
-
-                    // Menambahkan item berita ke kontainer
-                    newsContainer.appendChild(newsItem);
-                });
-            } else {
-                console.error('Error fetching news:', data.message);
+                // Memeriksa jika statusnya 'success'
+                if (response.status === 'success') {
+                    let newsHtml = '';
+                    response.data.data.forEach(function(news) {
+                        // Menambahkan berita ke dalam HTML
+                        newsHtml += '<div>';
+                        if (news.image) {
+                            newsHtml += '<img src="' + news.image + '" alt="News Image" style="max-width: 100%; height: auto;"/>';
+                        }
+                        newsHtml += '<h5><a href="' + news.link + '" target="_blank">' + news.title + '</a></h5>';
+                        newsHtml += '<p>' + news.contentSnippet + '</p>';
+                        newsHtml += '</div>';
+                    });
+                    // Menampilkan data berita ke dalam div dengan id 'newsContainer'
+                    $('#newsContainer').html(newsHtml);
+                } else {
+                    // Jika status bukan success, tampilkan pesan error
+                    alert('Gagal mengambil data berita: ' + response.message);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Menampilkan error jika ada masalah saat mengambil data
+                alert('Terjadi kesalahan saat mengambil data: ' + textStatus + ' - ' + errorThrown);
             }
-        } catch (error) {
-            console.error('Error fetching news:', error);
-        }
-    }
-
-    // Panggil fungsi untuk mengambil berita
-    fetchNews();
-});
+        });
+    });
 </script>
     @endpush

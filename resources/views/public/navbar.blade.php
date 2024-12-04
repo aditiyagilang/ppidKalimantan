@@ -37,47 +37,6 @@
 <link href="css/style1.css" rel="stylesheet">
 <script src="https://www.youtube.com/iframe_api"></script>
 
-<style>
-  #news-container {
-  height: 100vh;            /* Mengatur tinggi container menjadi 100% dari viewport height */
-  overflow-y: auto;         /* Menambahkan scroll vertikal jika konten melebihi tinggi container */
-  padding: 10px;            /* Memberikan jarak di sekitar konten */
-}
-
-.news-item {
-  display: flex;
-  align-items: center;
-  background-color: white;
-  margin-bottom: 15px;
-}
-
-.news-item img {
-  width: 80px;              /* Mengurangi ukuran gambar */
-  height: 80px;             /* Menyesuaikan ukuran gambar */
-  object-fit: cover;        /* Memastikan gambar tidak terdistorsi */
-  margin-right: 15px;       /* Memberikan jarak antara gambar dan teks */
-}
-
-.news-item .content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.news-item .title {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #333;
-  text-decoration: none;
-  margin-bottom: 5px;
-}
-
-.news-item .date {
-  font-size: 0.85rem;
-  color: #777;
-}
-
-  </style>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
@@ -153,21 +112,20 @@
                 </ul>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="beritaDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link " href="/news" id="beritaDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                   Berita
                 </a>
-                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="beritaDropdown">
-                  <li><a class="dropdown-item" href="#">Berita Terkini</a></li>
-                  <li><a class="dropdown-item" href="#">Arsip Berita</a></li>
-                </ul>
+                
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="laporanDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                   Laporan
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="laporanDropdown">
-                  <li><a class="dropdown-item" href="#">Laporan Keuangan</a></li>
-                  <li><a class="dropdown-item" href="#">Laporan Kinerja</a></li>
+                  <li><a class="dropdown-item" href="/report/finance">Laporan Keuangan Keuangan Pemerintah Daerah (LKPD)</a></li>
+                  <li><a class="dropdown-item" href="/report/performance">Laporan Kinerja Instansi Pemerintah (LKIP)</a></li>
+                  <li><a class="dropdown-item" href="/report/administration">Laporan Penyelenggaraan Pemerintah Daerah (LPPD)</a></li>
+                  <li><a class="dropdown-item" href="/report/ppid">Laporan PPID</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
@@ -175,18 +133,16 @@
                   Galeri
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="galeriDropdown">
-                  <li><a class="dropdown-item" href="#">Foto</a></li>
-                  <li><a class="dropdown-item" href="#">Video</a></li>
+                  <li><a class="dropdown-item" href="/gallery/photos">Foto</a></li>
+                  <li><a class="dropdown-item" href="/gallery/video">Video</a></li>
+                  <li><a class="dropdown-item" href="/gallery/podcast">Podcast</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="kontakDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link " href="/contact"  role="button"  aria-expanded="false">
                   Kontak
                 </a>
-                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="kontakDropdown">
-                  <li><a class="dropdown-item" href="#">Lokasi</a></li>
-                  <li><a class="dropdown-item" href="#">Hubungi Kami</a></li>
-                </ul>
+                
               </li>
             </ul>
           </div>
@@ -202,13 +158,55 @@
   </div>
 
   <!-- footer section -->
-  <footer class="footer_section">
+  <footer class="footer_section pt-5">
     <div class="container">
-      <p>
-        &copy; <span id="displayDateYear"></span> Dinas Komunikasi dan Informatika Pemprov Kaltim
-      </p>
+        <div class="row">
+            <!-- Kolom Informasi Kontak -->
+            <div class="col-lg-6">
+                <h6 class="font-weight-bold"  style="color:white;">Informasi Kontak</h6>
+                <div class="row mb-2">
+                    <div class="col-4 font-weight-bold">Alamat Kantor:</div>
+                    <div class="col-8">JL. Adhyaksa No 1 Banjarmasin, 70123 Kalimantan Selatan</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 font-weight-bold">Email:</div>
+                    <div class="col-8">tulidiki11@kemendikbud.go.id</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 font-weight-bold">Telepon:</div>
+                    <div class="col-8">0511-3304583, 0511-3304477</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 font-weight-bold">Jam Pelayanan:</div>
+                    <div class="col-8">
+                        Senin-Jumat: 08:00 - 16:00<br>
+                        Sabtu-Minggu: Tutup
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kolom Lokasi -->
+            <div class="col-lg-6">
+                <h6 class="font-weight-bold"  style="color:white;">Lokasi</h6>
+                <!-- Tambahkan iframe Google Maps untuk lokasi -->
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe 
+                        class="embed-responsive-item" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31825.287629398876!2d114.5739312!3d-3.3166941!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de4201345e91c45%3A0x472b51421dd3c5f5!2sJl.%20Adhyaksa%20No.1%2C%20Banjarmasin%2C%20Kalimantan%20Selatan!5e0!3m2!1sen!2sid!4v1697010113756!5m2!1sen!2sid" 
+                        allowfullscreen="" 
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-3">
+            <p>&copy; <span id="displayDateYear"></span> Dinas Komunikasi dan Informatika Pemprov Kaltim</p>
+        </div>
     </div>
-  </footer>
+</footer>
+
+
 </div>
   <!-- footer section -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
