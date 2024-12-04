@@ -10,14 +10,15 @@
   <meta name="author" content="" />
 
   <title>PPID Kalimantan</title>
-
+  
   <link rel="icon" href="{{ asset('images/logo_kaltim.png') }}" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+  <link href="{{ asset('css/style1.css') }}" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
   <!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}" /> -->
   <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}" />
-  <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/responsive.css') }}" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
@@ -34,14 +35,10 @@
 <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
 <!-- Customized Bootstrap Stylesheet -->
-<link href="css/style1.css" rel="stylesheet">
 <script src="https://www.youtube.com/iframe_api"></script>
+@stack('styles')
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 </head>
 
 <body>
@@ -72,23 +69,23 @@
           <!-- Navbar Menu -->
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
-              <li class="nav-item active">
+              <li class="nav-item {{ Route::is('public.index') ? 'active' : '' }}">
                 <a class="nav-link" href="{{route('public.index')}}">Beranda <span class="sr-only">(current)</span></a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="profilDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+              <li class="nav-item dropdown {{ Route::is('profile*') ? 'active' : '' }}">
+                <a class="nav-link dropdown-toggle" id="profilDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                   Profil
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="profilDropdown">
                   <li><a class="dropdown-item" href="{{route('profile-ppid')}}">Profil PPID</a></li>
-                  <li><a class="dropdown-item" href="{{route('visimisi-ppid')}}">Visi dan Misi</a></li>
-                  <li><a class="dropdown-item" href="{{route('struktur-ppid')}}">Struktur Organisasi PPID</a></li>
+                  <li><a class="dropdown-item" href="{{route('profile-visimisi-ppid')}}">Visi dan Misi</a></li>
+                  <li><a class="dropdown-item" href="{{route('profile-struktur-ppid')}}">Struktur Organisasi PPID</a></li>
                   <li><a class="dropdown-item" href="#">Tugas dan Fungsi</a></li>
-                  <li><a class="dropdown-item" href="{{route('dasar-hukum')}}">Dasar Hukum</a></li>
+                  <li><a class="dropdown-item" href="{{route('profile-dasar-hukum')}}">Dasar Hukum</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="informasiDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+              <li class="nav-item dropdown {{ Route::is('info*') ? 'active' : '' }}">
+                <a class="nav-link dropdown-toggle" id="informasiDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                   Informasi Publik
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="informasiDropdown">
@@ -98,8 +95,8 @@
                   <li><a class="dropdown-item" href="{{route('info-dikecualikan')}}">Daftar Dikecualikan</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="standarLayananDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+              <li class="nav-item dropdown {{ Route::is('standar*') ? 'active' : '' }}">
+                <a class="nav-link dropdown-toggle" id="standarLayananDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                   Standar Layanan
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="standarLayananDropdown">
@@ -111,14 +108,14 @@
                   <li><a class="dropdown-item" href="{{route('standar-dip')}}">DIP Provinsi</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link " href="/news" id="beritaDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+              <li class="nav-item dropdown {{ Request::is('news') ? 'active' : '' }}">
+                <a class="nav-link " href="/news" id="beritaDropdown" role="button">
                   Berita
                 </a>
                 
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="laporanDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+              <li class="nav-item dropdown {{ Request::is('report*') ? 'active' : '' }}">
+                <a class="nav-link dropdown-toggle" id="laporanDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                   Laporan
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="laporanDropdown">
@@ -128,8 +125,8 @@
                   <li><a class="dropdown-item" href="/report/ppid">Laporan PPID</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="galeriDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+              <li class="nav-item dropdown {{ Request::is('gallery*') ? 'active' : '' }}">
+                <a class="nav-link dropdown-toggle" id="galeriDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                   Galeri
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="galeriDropdown">
@@ -138,7 +135,7 @@
                   <li><a class="dropdown-item" href="/gallery/podcast">Podcast</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
+              <li class="nav-item dropdown {{ Request::is('contact') ? 'active' : '' }}">
                 <a class="nav-link " href="/contact"  role="button"  aria-expanded="false">
                   Kontak
                 </a>
@@ -221,13 +218,7 @@
   <!-- Google Map -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
   <!-- End Google Map -->
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">  
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-  <script src="lib/easing/easing.min.js"></script>
-  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-  <script src="https://www.youtube.com/iframe_api"></script>
+  
 
 
   <!-- Template Javascript -->

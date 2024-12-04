@@ -9,8 +9,8 @@
     </div>
     
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">1. Rencana Kerja dan Anggaran Provinsi Kaltim</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">1. Rencana Kerja dan Anggaran Provinsi Kaltim</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -52,8 +52,8 @@
     
     <!-- 2 -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">2. Data Perencanaan Pembangunan</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">2. Data Perencanaan Pembangunan</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -79,8 +79,8 @@
 
     <!-- 3 -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">3. Data Aparatur Sipil Negara Pemprov kaltim</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">3. Data Aparatur Sipil Negara Pemprov kaltim</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -122,8 +122,8 @@
 
     <!-- 4 -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">4. Data Kerjasama Pemprov Kaltim</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">4. Data Kerjasama Pemprov Kaltim</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -161,8 +161,8 @@
 
     <!-- 5 -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">5. Data Pengadaan</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">5. Data Pengadaan</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -196,8 +196,8 @@
 
     <!-- 6 -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">6. Laporan Pengaduan Masyarakat</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">6. Laporan Pengaduan Masyarakat</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -227,8 +227,8 @@
 
     <!-- 7 -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">7. Hasil Penelitian Pemprov Kaltim</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">7. Hasil Penelitian Pemprov Kaltim</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -266,8 +266,8 @@
 
     <!-- 8 -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">8. Rencana Strategis</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">8. Rencana Strategis</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -285,8 +285,8 @@
 
     <!-- 9 -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">9. Naskah Akedemis, Risalah Rapat dan Pendapat Parapihak</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">9. Naskah Akedemis, Risalah Rapat dan Pendapat Parapihak</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -312,8 +312,8 @@
 
     <!-- 10 -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">10. Data Aset Pemprov Kaltim</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">10. Data Aset Pemprov Kaltim</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -351,8 +351,8 @@
 
     <!-- 11 -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">11. Pedoman Pengelolaan Organisasi</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">11. Pedoman Pengelolaan Organisasi</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -366,8 +366,8 @@
 
     <!-- 12 -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">12. INFORMASI TENTANG PERATURAN, KEPUTUSAN/KEBIJAKAN YANG DIKELUARKAN OLEH PEMPROV KALTIM UNTUK PUBLIK</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">12. INFORMASI TENTANG PERATURAN, KEPUTUSAN/KEBIJAKAN YANG DIKELUARKAN OLEH PEMPROV KALTIM UNTUK PUBLIK</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -393,8 +393,8 @@
 
     <!-- 13 -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">13. Data Infrastruktur 2020</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">13. Data Infrastruktur 2020</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -436,8 +436,8 @@
 
     <!-- 14 -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">14. RANGKING PEMERINGKATAN KETERBUKAAN INFORMASI PUBLIK TINGKAT NASIONAL</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">14. RANGKING PEMERINGKATAN KETERBUKAAN INFORMASI PUBLIK TINGKAT NASIONAL</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -451,8 +451,8 @@
 
     <!-- 15 -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">15. SOP PEDOMAN PENGELOLAAN ORGANISASI</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">15. SOP PEDOMAN PENGELOLAAN ORGANISASI</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -474,8 +474,8 @@
 
     <!-- 16 -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">16. Dokumen Lingkungan Hidup</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">16. Dokumen Lingkungan Hidup</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">

@@ -1,3 +1,7 @@
+@push('styles')
+
+@endpush
+
 @extends('public.navbar')
 
 @section('content')

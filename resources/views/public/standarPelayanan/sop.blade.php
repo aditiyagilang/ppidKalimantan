@@ -9,8 +9,8 @@
     </div>
     
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">Standar Operasi Pelayanan PPID</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">Standar Operasi Pelayanan PPID</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">

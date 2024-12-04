@@ -10,8 +10,8 @@
 
     <!-- Profil Pemerintah Provinsi Kalimantan Timur -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">1. Informasi Profil Pemerintah Provinsi Kalimantan Timur</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">1. Informasi Profil Pemerintah Provinsi Kalimantan Timur</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -45,8 +45,8 @@
 
     <!-- Pejabat Pengelola Pelayanan Informasi dan Dokumentasi -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">2. Pejabat Pengelola Pelayanan Informasi dan Dokumentasi Pemerintah Prov. Kaltim</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">2. Pejabat Pengelola Pelayanan Informasi dan Dokumentasi Pemerintah Prov. Kaltim</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -60,8 +60,8 @@
 
     <!-- Dokumen Pelaksanaan Anggaran -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">3. Dokumen Pelaksanaan Anggaran</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">3. Dokumen Pelaksanaan Anggaran</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -95,8 +95,8 @@
 
     <!-- Ringkasan Laporan Layanan PPID -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">4. Ringkasan Laporan Layanan PPID Pemprov. Kaltim</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">4. Ringkasan Laporan Layanan PPID Pemprov. Kaltim</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">

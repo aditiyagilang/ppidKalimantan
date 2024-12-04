@@ -21,11 +21,11 @@
       text-align: center;
   }
 </style>
-<div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
+<div id="custom-carousel2" class="carousel slide carousel-fade" data-bs-ride="carousel">
   <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#custom-carousel2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#custom-carousel2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#custom-carousel2" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -38,11 +38,11 @@
       <img src="{{ asset('images/banner3.jpg') }}" class="d-block w-100" alt="Banner 3">
     </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+  <button class="carousel-control-prev" type="button" data-bs-target="#custom-carousel2" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+  <button class="carousel-control-next" type="button" data-bs-target="#custom-carousel2" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
@@ -140,25 +140,25 @@
     <div class="row">
       <div class="col-md-3">
         <div class="circle-box">
-          <h3 class="circle-number text-warning">150</h3>
+          <h3 class="circle-number text-warning">{{ $totalPublicInformation }}</h3>
           <p>Daftar Informasi Publik</p>
         </div>
       </div>
       <div class="col-md-3">
         <div class="circle-box">
-          <h3 class="circle-number text-warning">75</h3>
+          <h3 class="circle-number text-warning">{{ $totalRequest }}</h3>
           <p>Permohonan</p>
         </div>
       </div>
       <div class="col-md-3">
         <div class="circle-box">
-          <h3 class="circle-number text-warning">10</h3>
+          <h3 class="circle-number text-warning">{{ $totalObjection }}</h3>
           <p>Keberatan</p>
         </div>
       </div>
       <div class="col-md-3">
         <div class="circle-box">
-          <h3 class="circle-number text-warning">65</h3>
+          <h3 class="circle-number text-warning">{{ $totalRequestDone }}</h3>
           <p>Permohonan Selesai</p>
         </div>
       </div>
@@ -231,7 +231,7 @@
 @push('scripts')
 <script>
  document.addEventListener('DOMContentLoaded', function () {
-  var carouselElement = document.querySelector('#carouselExampleIndicators');
+  var carouselElement = document.querySelector('#custom-carousel2');
   if (carouselElement) {
     var carousel = new bootstrap.Carousel(carouselElement);
   }

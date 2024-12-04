@@ -8,10 +8,17 @@ use App\Http\Controllers\PublicInformationRequestController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PublicInformationController;
 use App\Http\Controllers\NewsController;
+use App\Models\Objection;
 use Illuminate\Support\Facades\Http;
+use App\Models\PublicInformation;
+use App\Models\PublicInformationRequest;
 
 Route::get('/', function () {
-    return view('public.index');
+    $totalPublicInformation = PublicInformation::count();
+    $totalRequest = PublicInformationRequest::count();
+    $totalObjection = Objection::count();
+    $totalRequestDone = PublicInformationRequest::where('status', 'Approved')->count();
+    return view('public.index', compact('totalPublicInformation', 'totalRequest', 'totalObjection', 'totalRequestDone'));
 })->name('public.index');
 
 Route::get('/news', function () {
@@ -28,15 +35,15 @@ Route::get('/profile-ppid', function () {
 
 Route::get('/visi-misi', function () {
     return view('public.profil.visiMisi');
-})->name('visimisi-ppid');
+})->name('profile-visimisi-ppid');
 
 Route::get('/struktur-organisasi', function () {
     return view('public.profil.strukturOrganisasi');
-})->name('struktur-ppid');
+})->name('profile-struktur-ppid');
 
 Route::get('/dasar-hukum', function () {
     return view('public.profil.dasarHukum');
-})->name('dasar-hukum');
+})->name('profile-dasar-hukum');
 
 Route::get('/tata-cara-permohonan-informasi', function () {
     return view('public.standarPelayanan.informasi');

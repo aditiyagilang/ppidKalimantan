@@ -9,8 +9,8 @@
     </div>
     
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">1. Informasi Ketahanan Pangan Kaltim</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">1. Informasi Ketahanan Pangan Kaltim</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -26,8 +26,8 @@
         </div>
     </div>
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">2. Informasi Cuaca,, Potensi Bencana Pemprov Kaltim</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">2. Informasi Cuaca,, Potensi Bencana Pemprov Kaltim</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -39,8 +39,8 @@
         </div>
     </div>
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">3. Informasi Terkait Covid-19</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">3. Informasi Terkait Covid-19</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
@@ -116,8 +116,8 @@
         </div>
     </div>
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">4. Penanggulangan Bencana</h5>
+        <div class="card-header custom-bg text-white">
+            <h5 class="mb-0 text-white">4. Penanggulangan Bencana</h5>
         </div>
         <div class="card-body">
             <ul class="list-unstyled">

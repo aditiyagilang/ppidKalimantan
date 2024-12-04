@@ -100,7 +100,7 @@ a:focus {
   top: 0;
   width: 100%;
   z-index: 10; /* Agar tetap di atas carousel */
-  background-color: rgba(252, 252, 252, 0.9); /* Warna putih dengan transparansi */
+  background-color: rgba(252, 252, 252, 0.5); /* Warna putih dengan transparansi */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan agar terlihat lebih jelas */
 }
 
@@ -146,16 +146,16 @@ a:focus {
 }
 
 .navbar-brand {
+  font-size: 0;
   padding: 0;
   margin: 0;
   color: #000000;
-  font-weight: bold;
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 550;
 }
 
 .navbar-brand span {
-  color: #00a859;
+  color: #000000;
   /* text-transform: uppercase; */
 }
 
@@ -171,10 +171,11 @@ a:focus {
   padding: 0px 10px;
   color: #000000;
   text-align: center;
+  font-weight: 500;
 }
 
 .custom_nav-container .navbar-nav .nav-item:hover .nav-link, .custom_nav-container .navbar-nav .nav-item.active .nav-link {
-  color: #0355cc;
+  color: #ff9d41;
 }
 
 .custom_nav-container .form-inline .nav_search-btn {
@@ -186,7 +187,7 @@ a:focus {
 }
 
 .custom_nav-container .form-inline .nav_search-btn:hover {
-  color: #0355cc;
+  color: #ff8a1d;
 }
 
 .custom_nav-container .navbar-toggler {
@@ -465,7 +466,7 @@ a:focus {
 
 .about_section .detail-box a:hover {
   background-color: transparent;
-  color: #0355cc;
+  color: #ff8a1d;
 }
 
 .about_section .img-box img {
@@ -885,7 +886,24 @@ a:focus {
   opacity: 1;
 }
 
-.carousel-item img {
+#custom-carousel2 .carousel-item {
+  position: relative;
+}
+
+#custom-carousel2 .carousel-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Warna hitam dengan opacity 50% */
+  z-index: 1;
+}
+
+#custom-carousel2 .carousel-item img {
+  position: relative;
+  z-index: 0; /* Pastikan gambar berada di bawah overlay */
   height: 500px; /* Sesuaikan dengan kebutuhan Anda */
   object-fit: cover; /* Agar gambar memenuhi area tanpa distorsi */
 }
@@ -1007,5 +1025,9 @@ a:focus {
 
 .carousel-item {
   text-align: center;
+}
+
+.custom-bg {
+  background-color: #007bff !important; /* Ganti warna latar belakang sesuai keinginan */
 }
 /*# sourceMappingURL=style.css.map */
